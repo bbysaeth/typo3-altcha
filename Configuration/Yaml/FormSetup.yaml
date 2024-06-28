@@ -1,0 +1,66 @@
+TYPO3:
+  CMS:
+    Form:
+      prototypes:
+        standard:
+          formEditor:
+            dynamicJavaScriptModules:
+            # dynamicRequireJsModules:
+              additionalViewModelModules:
+                1719694152945: '@bbysaeth/typo3-altcha/Backend/FormEditor/AltchaViewModel.js'
+            formEditorPartials:
+              FormElement-Altcha: 'Stage/SimpleTemplate'
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                partialRootPaths:
+                  175: EXT:altcha/Resources/Private/Partials/
+            Altcha:
+              implementationClassName: 'BBysaeth\Typo3Altcha\Domain\Model\FormElements\AltchaElement'
+              properties:
+                containerClassAttribute: 'form-element form-element-email mb-3'
+              formEditor:
+                label: Altcha
+                iconIdentifier: 'altcha-icon'
+                group: custom
+                groupSorting: 1000
+                propertyCollections:
+                  validators:
+                    10:
+                      identifier: 'Altcha'
+                      editors:
+                        100:
+                          identifier: 'header'
+                          templateName: 'Inspector-CollectionElementHeaderEditor'
+                          label: 'Altcha Validator'
+                editors:
+                  100:
+                    identifier: header
+                    templateName: Inspector-FormElementHeaderEditor
+                  200:
+                    identifier: label
+                    templateName: Inspector-TextEditor
+                    label: formEditor.elements.FormElement.editor.label.label
+                    propertyPath: label
+                  900:
+                    identifier: validators
+                    templateName: Inspector-ValidatorsEditor
+                    label: formEditor.elements.TextMixin.editor.validators.label
+                    selectOptions:
+                      10:
+                        value: Altcha
+                  9999:
+                    identifier: removeButton
+                    templateName: Inspector-RemoveElementEditor
+                predefinedDefaults:
+                  renderingOptions:
+                    doNotShowLabel: true
+                  validators:
+                    -
+                      identifier: Altcha
+          validatorsDefinition:
+            Altcha:
+              implementationClassName: 'BBysaeth\Typo3Altcha\Validation\AltchaValidator'
+              formEditor:
+                iconIdentifier: 'form-validator'
+                label: 'Altcha Validator'    

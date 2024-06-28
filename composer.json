@@ -1,0 +1,34 @@
+{
+    "name": "bbysaeth/typo3-altcha",
+    "description": "TYPO3 form element for spam protection by utilizing the proof-of-work mechanism ALtcha.",
+    "license": "GPL-2.0-or-later",
+    "keywords": [
+        "altcha",
+        "captcha",
+        "proof-of-work",
+        "spam-protection",
+        "typo3"
+    ],
+    "homepage": "https://github.com/bbysaeth/typo3-altcha",
+    "type": "typo3-cms-extension",
+    "autoload": {
+        "psr-4": {
+            "BBysaeth\\Typo3Altcha\\": "Classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Benjamin Bysäth",
+            "email": "benjamin@bysaeth.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^12.4.0",
+        "typo3/cms-form": "^12.4.0"
+    },
+    "extra": {
+		"typo3/cms": {
+			"extension-key": "altcha"
+		}
+	}
+}

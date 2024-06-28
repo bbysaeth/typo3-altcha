@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  BBysaeth\Typo3Altcha\:
+    resource: '../Classes/*'
+
+  BBysaeth\Typo3Altcha\Services\AltchaService:
+    public: true

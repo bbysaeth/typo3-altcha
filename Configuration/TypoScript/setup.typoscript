@@ -1,0 +1,5 @@
+plugin.tx_form {
+    settings.yamlConfigurations {
+        24515 = EXT:altcha/Configuration/Yaml/FormSetup.yaml
+    }
+}
