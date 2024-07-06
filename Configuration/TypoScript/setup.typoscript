@@ -3,3 +3,10 @@ plugin.tx_form {
         24515 = EXT:altcha/Configuration/Yaml/FormSetup.yaml
     }
 }
+
+plugin.tx_altcha {
+    settings {
+        minimumComplexity = {$plugin.tx_altcha.minimumComplexity}
+        maximumComplexity = {$plugin.tx_altcha.maximumComplexity}
+    }
+}
