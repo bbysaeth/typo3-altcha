@@ -1,6 +1,31 @@
-# TYPO3 Altcha Extension
+# TYPO3 Extension ``Altcha``
+
+This TYPO3 extension integrates Altcha, an innovative alternative to traditional captchas, into the Form Extension. Altcha employs a proof-of-work approach to safeguard forms against spam and abuse without requiring users to solve visual puzzles.
+Key Features:
+
+* Seamless integration with the TYPO3 Form Extension
+* Configurable difficulty levels for the proof-of-work mechanism
+* Automatic validation of Altcha responses
+* Enhanced protection against automated bots
+* User-friendly alternative to conventional captchas
+
+The extension empowers developers to easily incorporate Altcha into existing forms, thereby enhancing security without compromising user experience.
+
+## Installation
+
+### via Composer
+
+The recommended way to install TYPO3 Console is by using [Composer](https://getcomposer.org):
+
+    composer require bbysaeth/altcha
+
 
 This TYPO3 extension is licensed under the GNU General Public License Version 2 (GPLv2).
+
+### via TYPO3 Extension Repository
+
+Download and install the extension with the extension manager module or directly from the
+[TER](https://extensions.typo3.org/extension/altcha/).
 
 ## License
 
