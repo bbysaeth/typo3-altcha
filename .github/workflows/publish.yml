@@ -1,0 +1,15 @@
+name: TERUpload
+
+on:
+  push:
+    tags:
+      - "**"
+
+jobs:
+  TERUpload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: tomasnorre/typo3-upload-ter@v2
+        with:
+          api-token: ${{ secrets.TYPO3_API_TOKEN }}
