@@ -68,8 +68,8 @@ TYPO3:
             EmailToReceiver:
               options:
                 templateRootPaths:
-                  2011: 'EXT:altcha/Resources/Private/Frontend/Templates/Finishers/Email/'
+                  2011: 'EXT:altcha/Resources/Private/Templates/Finishers/Email/'
             EmailToSender:
               options:
                 templateRootPaths:
-                  2011: 'EXT:altcha/Resources/Private/Frontend/Templates/Finishers/Email/'
+                  2011: 'EXT:altcha/Resources/Private/Templates/Finishers/Email/'
