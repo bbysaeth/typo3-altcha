@@ -63,4 +63,13 @@ TYPO3:
               implementationClassName: 'BBysaeth\Typo3Altcha\Validation\AltchaValidator'
               formEditor:
                 iconIdentifier: 'form-validator'
-                label: 'Altcha Validator'    
+                label: 'Altcha Validator'
+          finishersDefinition:
+            EmailToReceiver:
+              options:
+                templateRootPaths:
+                  2011: 'EXT:altcha/Resources/Private/Frontend/Templates/Finishers/Email/'
+            EmailToSender:
+              options:
+                templateRootPaths:
+                  2011: 'EXT:altcha/Resources/Private/Frontend/Templates/Finishers/Email/'
