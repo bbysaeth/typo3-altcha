@@ -8,5 +8,7 @@ plugin.tx_altcha {
     settings {
         minimumComplexity = {$plugin.tx_altcha.minimumComplexity}
         maximumComplexity = {$plugin.tx_altcha.maximumComplexity}
+        hideFooter = {$plugin.tx_altcha.hideFooter}
+        hideAltchaLogo = {$plugin.tx_altcha.hideAltchaLogo}
     }
 }
