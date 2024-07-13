@@ -1,8 +1,13 @@
 # customsubcategory=complexity=Complexity for proof-of-work challenge
+# customsubcategory=customization=Customization of the field
 
 plugin.tx_altcha {
     # cat=plugin.tx_altcha/complexity; type=integer; label=Minimum complexity(Default 5000)
     minimumComplexity = 5000
     # cat=plugin.tx_altcha/complexity; type=integer; label=Maximum complexity(Default 15000)
     maximumComplexity = 15000
+    # cat=plugin.tx_altcha/customization; type=boolen; label=Hide Altcha Logo(Default 0)
+    hideAltchaLogo = 0
+    # cat=plugin.tx_altcha/customization; type=boolen; label=Hide Footer(Default 0)
+    hideFooter = 0
 }

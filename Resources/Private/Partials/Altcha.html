@@ -1,17 +1,21 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers"
     xmlns:altcha="http://typo3.org/ns/BBysaeth/Typo3Altcha/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:asset.script identifier="altcha" src="EXT:altcha/Resources/Public/JavaScript/Libs/altcha.js"
-    defer="true" async="true" type="module" />
-<f:asset.css identifier="altcha-css" > 
+<f:asset.script identifier="altcha" src="EXT:altcha/Resources/Public/JavaScript/Libs/altcha.js" defer="true"
+    async="true" type="module" />
+<f:asset.css identifier="altcha-css">
     .is-invalid span.invalid-feedback {
-        display:block;
+    display:block;
     }
 </f:asset.css>
 <formvh:renderRenderable renderable="{element}">
     <f:render partial="Field/Field" arguments="{element: element, doNotShowLabel: 1}" contentAs="elementContent">
-        <altcha:form.altcha property="{element.identifier}" id="{element.uniqueIdentifier}" class="{element.properties.elementClassAttribute} form-control">
-            <altcha-widget challengejson="{challenge -> f:format.json()}" name="{name}"></altcha-widget>
+        <altcha:form.altcha property="{element.identifier}" id="{element.uniqueIdentifier}"
+            class="{element.properties.elementClassAttribute} form-control">
+            <f:debug>{customization}</f:debug>
+            <altcha-widget challengejson="{challenge -> f:format.json()}" name="{name}"
+                {f:if(condition: '{customization.hideAltchaLogo}' , then: 'hideLogo' , else: '' )}
+                {f:if(condition: '{customization.hideFooter}' , then: 'hideFooter' , else: '' )}></altcha-widget>
         </altcha:form.altcha>
     </f:render>
 </formvh:renderRenderable>
