@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1721248632" source-language="en" datatype="plaintext" original="messages" date="2024-07-17T22:37:12Z" product-name="typo3altcha">
+        <header/>
+        <body>
+            <trans-unit id="tx_typo3altcha_domain_model_challenge" xml:space="preserve">
+                <source>Altcha: Challenge</source>
+            </trans-unit>
+            <trans-unit id="tx_typo3altcha_domain_model_challenge.challenge" xml:space="preserve">
+                <source>Challenge</source>
+            </trans-unit>
+            <trans-unit id="tx_typo3altcha_domain_model_challenge.is_solved" xml:space="preserve">
+                <source>Is Solved?</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

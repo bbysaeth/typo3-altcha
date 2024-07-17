@@ -6,6 +6,8 @@ plugin.tx_altcha {
     minimumComplexity = 5000
     # cat=plugin.tx_altcha/complexity; type=integer; label=Maximum complexity(Default 15000)
     maximumComplexity = 15000
+    # cat=plugin.tx_altcha/complexity; type=integer; label=Expires after seconds(Default 360)
+    expires = 360
     # cat=plugin.tx_altcha/customization; type=boolen; label=Hide Altcha Logo(Default 0)
     hideAltchaLogo = 0
     # cat=plugin.tx_altcha/customization; type=boolen; label=Hide Footer(Default 0)

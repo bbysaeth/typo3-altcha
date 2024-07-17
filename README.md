@@ -11,6 +11,12 @@ Key Features:
 
 The extension empowers developers to easily incorporate Altcha into existing forms, thereby enhancing security without compromising user experience.
 
+## Features
+
+* Altcha spam protection field for ext:form
+* Customizable expiration time of challenges
+* Scheduler task for removing obsolete(expired and solved) challenges
+
 ## Installation
 
 ### via Composer
@@ -19,6 +25,7 @@ The recommended way to install TYPO3 Console is by using [Composer](https://getc
 
     composer require bbysaeth/altcha
 
+Add static template and update database scheme.
 
 This TYPO3 extension is licensed under the GNU General Public License Version 2 (GPLv2).
 
@@ -26,6 +33,16 @@ This TYPO3 extension is licensed under the GNU General Public License Version 2 
 
 Download and install the extension with the extension manager module or directly from the
 [TER](https://extensions.typo3.org/extension/altcha/).
+
+## Configuration
+### TypoScript configuration settings
+The following TypoScript settings are available.
+
+* `plugin.tx_altcha.minimumComplexity`*(integer)* Minimum number for range of complexity
+* `plugin.tx_altcha.maximumComplexity` *(integer)* Maximum number for range of complexity
+* `plugin.tx_altcha.expires` *(integer)* Seconds after the challenge expires
+* `plugin.tx_altcha.hideFooter` *(bool)* Hide/Show altcha footer link in field
+* `plugin.tx_altcha.hideAltchaLogo` *(bool)* Hide/Show altcha logo in field
 
 ## License
 

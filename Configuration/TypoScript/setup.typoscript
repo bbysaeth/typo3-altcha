@@ -10,5 +10,6 @@ plugin.tx_altcha {
         maximumComplexity = {$plugin.tx_altcha.maximumComplexity}
         hideFooter = {$plugin.tx_altcha.hideFooter}
         hideAltchaLogo = {$plugin.tx_altcha.hideAltchaLogo}
+        expires = {$plugin.tx_altcha.expires}
     }
 }

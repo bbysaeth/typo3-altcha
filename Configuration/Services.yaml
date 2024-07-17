@@ -9,3 +9,8 @@ services:
 
   BBysaeth\Typo3Altcha\Services\AltchaService:
     public: true
+  BBysaeth\Typo3Altcha\Command\RemoveObsoleteChallengesCommand:
+    tags:
+      - name: console.command
+        command: 'altcha:remove-obsolete-challenges'
+        description: 'Removes obsolete challenges from the database'
