@@ -3,9 +3,13 @@
     "description": "TYPO3 form element for spam protection by utilizing the proof-of-work mechanism ALtcha.",
     "license": "GPL-2.0-or-later",
     "keywords": [
+        "abuse",
         "altcha",
+        "bot",
         "captcha",
         "proof-of-work",
+        "recaptcha",
+        "spam",
         "spam-protection",
         "typo3"
     ],
@@ -26,7 +30,9 @@
         "typo3/cms-core": "^12.4.0",
         "typo3/cms-extbase": "^12.4.0",
         "typo3/cms-form": "^12.4.0",
-        "typo3/cms-fluid": "^12.4.0",
+        "typo3/cms-fluid": "^12.4.0"
+    },
+    "suggest": {
         "typo3/cms-scheduler": "^12.4.0"
     },
     "extra": {
