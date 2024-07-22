@@ -9,6 +9,9 @@
             <trans-unit id="tx_typo3altcha_domain_model_challenge.challenge" xml:space="preserve">
                 <source>Challenge</source>
             </trans-unit>
+            <trans-unit id="tx_typo3altcha_domain_model_challenge.solution" xml:space="preserve">
+                <source>Solution</source>
+            </trans-unit>
             <trans-unit id="tx_typo3altcha_domain_model_challenge.is_solved" xml:space="preserve">
                 <source>Is Solved?</source>
             </trans-unit>

@@ -7,6 +7,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Challenge extends AbstractEntity {
     protected string $challenge;
     protected int $tstamp = 0;
+    protected int $solution = 0;
     protected bool $isSolved = false;
 
     public function __construct() {
@@ -23,7 +24,7 @@ class Challenge extends AbstractEntity {
     public function getIsSolved(): bool {
         return $this->isSolved;
     }
-    
+
     public function setIsSolved(bool $isSolved): void {
         $this->isSolved = $isSolved;
     }
@@ -32,4 +33,11 @@ class Challenge extends AbstractEntity {
         return $this->tstamp;
     }
 
+    public function getSolution(): int {
+        return $this->solution;
+    }
+
+    public function setSolution(int $solution): void {
+        $this->solution = $solution;
+    }
 }

@@ -60,6 +60,13 @@ return [
                 'eval' => 'required,trim',
             ],
         ],
+        'solution' => [
+            'label' => $ll . 'tx_typo3altcha_domain_model_challenge.solution',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'required,trim',
+            ],
+        ],
         'is_solved' => [
             'label' => $ll . 'tx_typo3altcha_domain_model_challenge.is_solved',
             'config' => [
