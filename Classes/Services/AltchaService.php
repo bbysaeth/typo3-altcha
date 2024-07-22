@@ -9,6 +9,7 @@ use BBysaeth\Typo3Altcha\Domain\Repository\ChallengeRepository;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 class AltchaService
@@ -43,23 +44,33 @@ class AltchaService
 
     public function createChallenge(string $salt = null, $number = null): array
     {
-        $hmac = $this->configuration['hmac'] ?? 'S3cr3t';
         $typoscriptSettings = $this->getTypoScriptSettings();
-        $challenge = new Challenge();
-        $minComplexity = MathUtility::forceIntegerInRange($typoscriptSettings['minimumComplexity'], 0, 2000000000, 15000);
-        $maxComplexity = MathUtility::forceIntegerInRange($typoscriptSettings['maximumComplexity'], 0, 2000000000, 15000);
+
+        if (!$number) {
+            $minComplexity = $typoscriptSettings['minimumComplexity'];
+            $maxComplexity = $typoscriptSettings['maximumComplexity'];
+
+            if ($maxComplexity < $minComplexity) {
+                throw new InvalidArgumentValueException('Maximum complexity must be greater than minimum complexity');
+            }
+
+            $minInt = MathUtility::forceIntegerInRange($minComplexity, 0, 2000000000, 15000);
+            $maxInt = MathUtility::forceIntegerInRange($maxComplexity, 0, 2000000000, 15000);
+            $number = random_int($minInt, $maxInt);
+        }
+
         $salt = $salt ?? bin2hex(random_bytes(12));
-        $number = $number ?? random_int($minComplexity, $maxComplexity);
         $hashedChallenge = hash('sha256', $salt . $number);
+        $challenge = new Challenge();
         $challenge->setChallenge($hashedChallenge);
-        $signature = hash_hmac('sha256', $challenge->getChallenge(), $hmac);
+        $challenge->setSolution($number);
         $this->challengeRepository->add($challenge);
 
         return [
             'algorithm' => 'SHA-256',
             'challenge' => $hashedChallenge,
             'salt' => $salt,
-            'signature' => $signature,
+            'signature' => $this->getSignature($challenge->getChallenge()),
         ];
     }
 
@@ -71,13 +82,19 @@ class AltchaService
         if ($json === null) {
             return false;
         }
-        $challenge = $this->challengeRepository->findOneBy(['challenge' => $json->challenge, 'isSolved' => false]);
+
+        $challenge = $this->challengeRepository->findOneBy([
+            'challenge' => $json->challenge,
+            'solution' => $json->number,
+            'isSolved' => false
+        ]);
+
         if(!$challenge || $challenge instanceof Challenge === false) {
             return false;
         }
+
         $expires = MathUtility::forceIntegerInRange($typoscriptSettings['expires'], 30, 2000000000, 360);
         if($challenge->getTstamp() + $expires < time()) {
-            $challenge->setDeleted(true);
             $this->challengeRepository->remove($challenge);
             $this->persistenceManager->persistAll();
             return false;
@@ -87,10 +104,9 @@ class AltchaService
         $this->challengeRepository->update($challenge);
         $this->persistenceManager->persistAll();
 
-        $expectedResult = $this->createChallenge($json->salt, $json->number);
-        $result = $json->signature === $expectedResult['signature']
-            && $json->challenge === $expectedResult['challenge']
-            && $json->algorithm === $expectedResult['algorithm'];
+        $expectedSignature = $this->getSignature($json->challenge);
+        $result = $json->signature === $expectedSignature
+            && $json->number === $challenge->getSolution();
         return $result;
     }
 
@@ -108,5 +124,11 @@ class AltchaService
         }
         $this->persistenceManager->persistAll();
         return $count;
+    }
+
+    private function getSignature(string $string): string
+    {
+        $hmac = trim($this->configuration['hmac']) !== '' ? trim($this->configuration['hmac']) : $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'];
+        return hash_hmac('sha256', $string, $hmac);
     }
 }
