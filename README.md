@@ -35,14 +35,19 @@ Download and install the extension with the extension manager module or directly
 [TER](https://extensions.typo3.org/extension/altcha/).
 
 ## Configuration
+### Extension Configuration
+
+`HMac Sercret Key (basic.hmac [string])` HMAC secret key for challenge generation, if not defined TYPO3 encryption key will be used.
+
 ### TypoScript configuration settings
 The following TypoScript settings are available.
 
 * `plugin.tx_altcha.minimumComplexity`*(integer)* Minimum number for range of complexity
-* `plugin.tx_altcha.maximumComplexity` *(integer)* Maximum number for range of complexity
+* `plugin.tx_altcha.maximumComplexity` *(integer)* Maximum number for range of complexity, must be bigger than minimumComplexity
 * `plugin.tx_altcha.expires` *(integer)* Seconds after the challenge expires
 * `plugin.tx_altcha.hideFooter` *(bool)* Hide/Show altcha footer link in field
 * `plugin.tx_altcha.hideAltchaLogo` *(bool)* Hide/Show altcha logo in field
+
 
 ## License
 
