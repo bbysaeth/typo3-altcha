@@ -18,7 +18,6 @@ return [
         'transOrigDiffSourceField' => 'l18n_diffsource',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -57,7 +56,8 @@ return [
             'label' => $ll . 'tx_typo3altcha_domain_model_challenge.challenge',
             'config' => [
                 'type' => 'input',
-                'eval' => 'required,trim',
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'is_solved' => [
