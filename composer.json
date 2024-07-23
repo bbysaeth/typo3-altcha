@@ -27,13 +27,13 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "^12.4.0",
-        "typo3/cms-extbase": "^12.4.0",
-        "typo3/cms-form": "^12.4.0",
-        "typo3/cms-fluid": "^12.4.0"
+        "typo3/cms-core": "^12.4.0 || ^13.0 || 13.0.x-dev",
+        "typo3/cms-extbase": "^12.4.0 || ^13.0 || 13.0.x-dev",
+        "typo3/cms-form": "^12.4.0 || ^13.0 || 13.0.x-dev",
+        "typo3/cms-fluid": "^12.4.0 || ^13.0 || 13.0.x-dev"
     },
     "suggest": {
-        "typo3/cms-scheduler": "^12.4.0"
+        "typo3/cms-scheduler": "^12.4.0 || ^13.0 || 13.0.x-dev"
     },
     "extra": {
 		"typo3/cms": {
