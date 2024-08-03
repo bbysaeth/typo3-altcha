@@ -36,7 +36,7 @@ class AltchaViewHelper extends AbstractFormFieldViewHelper
         $container = $this->templateVariableContainer;
         $container->add('name', $name);
         $container->add('challenge', $challenge);
-        $container->add('customization', $this->typoscriptSettings);
+        $container->add('settings', $this->typoscriptSettings);
         $content = $this->renderChildren();
         
         return $content;

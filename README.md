@@ -47,6 +47,7 @@ The following TypoScript settings are available.
 * `plugin.tx_altcha.expires` *(integer)* Seconds after the challenge expires
 * `plugin.tx_altcha.hideFooter` *(bool)* Hide/Show altcha footer link in field
 * `plugin.tx_altcha.hideAltchaLogo` *(bool)* Hide/Show altcha logo in field
+* `plugin.tx_altcha.auto` *(Choose: disabled,onload,onfocus)* Enable/Disable auto verify onload or onfocus
 
 
 ## License
