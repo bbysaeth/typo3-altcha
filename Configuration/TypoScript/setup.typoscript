@@ -11,5 +11,6 @@ plugin.tx_altcha {
         hideFooter = {$plugin.tx_altcha.hideFooter}
         hideAltchaLogo = {$plugin.tx_altcha.hideAltchaLogo}
         expires = {$plugin.tx_altcha.expires}
+        auto = {$plugin.tx_altcha.auto}
     }
 }
