@@ -3,9 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-  build-test:
+  lint-php:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - uses: php-actions/composer@v6
@@ -15,3 +14,16 @@ jobs:
     - uses: php-actions/phpstan@v3
       with:
         path: Classes/
+  lint-typoscript:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: shivammathur/setup-php@v2
+      with: 
+        php-version: '8.3'
+    - uses: php-actions/composer@v6
+      with:
+        args: --profile --ignore-platform-reqs
+    - name: Lint lint-typoscript
+      run: |
+        php -v && ./vendor/bin/typoscript-lint --fail-on-warnings

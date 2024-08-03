@@ -45,5 +45,8 @@
             "typo3/class-alias-loader": true,
             "typo3/cms-composer-installers": true
         }
+    },
+    "require-dev": {
+        "helmich/typo3-typoscript-lint": "^3.2"
     }
 }
