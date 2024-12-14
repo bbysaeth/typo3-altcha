@@ -23,7 +23,7 @@ The extension empowers developers to easily incorporate Altcha into existing for
 
 The recommended way to install TYPO3 Console is by using [Composer](https://getcomposer.org):
 
-    composer require bbysaeth/altcha
+    composer require bbysaeth/typo3-altcha
 
 Add static template and update database scheme.
 
