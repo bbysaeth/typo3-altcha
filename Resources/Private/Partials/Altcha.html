@@ -9,15 +9,18 @@
     display:block;
     }
 </f:asset.css>
+
 <formvh:renderRenderable renderable="{element}">
     <f:render partial="Field/Field" arguments="{element: element, doNotShowLabel: 1}" contentAs="elementContent">
         <altcha:form.altcha property="{element.identifier}" id="{element.uniqueIdentifier}"
             class="{element.properties.elementClassAttribute} form-control">
-            <altcha-widget challengejson="{challenge -> f:format.json()}" name="{name}"
-                {f:if(condition: '{settings.hideAltchaLogo}' , then: 'hideLogo' , else: '' )}
-                {f:if(condition: '{settings.hideFooter}' , then: 'hideFooter' , else: '' )} 
-                {f:if(condition: '{settings.auto} != disabled' , then: 'auto="{settings.auto}' , else: '' )}"
-                ></altcha-widget>
+            <altcha-widget
+                challengejson="{challenge -> f:format.json()}"
+                name="{name}"
+                {f:if(condition: settings.hideAltchaLogo, then: 'hidelogo')}
+                {f:if(condition: settings.hideFooter, then: 'hidefooter')}
+                {f:if(condition: settings.auto != 'disabled', then: 'auto={settings.auto}')}
+            ></altcha-widget>
         </altcha:form.altcha>
     </f:render>
 </formvh:renderRenderable>
