@@ -1,7 +1,7 @@
 plugin {
     tx_form {
         settings.yamlConfigurations {
-            24515 = EXT:altcha/Configuration/Yaml/FormSetup.yaml
+            125 = EXT:altcha/Configuration/Yaml/FormSetup.yaml
         }
     }
 

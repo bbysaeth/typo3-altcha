@@ -17,6 +17,7 @@
             <altcha-widget
                 challengejson="{challenge -> f:format.json()}"
                 name="{name}"
+                strings="{f:render(partial: 'AltchaTranslations')}"
                 {f:if(condition: settings.hideAltchaLogo, then: 'hidelogo')}
                 {f:if(condition: settings.hideFooter, then: 'hidefooter')}
                 {f:if(condition: settings.auto != 'disabled', then: 'auto={settings.auto}')}
