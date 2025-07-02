@@ -45,11 +45,7 @@ class AltchaService
 
     protected function getTypoScriptSettings(): array
     {
-        $typoScriptSetup = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
-        $settings = $typoScriptSetup['plugin.']['tx_altcha.']['settings.'] ?? [];
-        return $settings;
+        return $this->typoscriptSetup['plugin.']['tx_altcha.']['settings.'] ?? [];
     }
 
     public function createChallenge(): array
@@ -116,10 +112,10 @@ class AltchaService
         $count = 0;
         $typoscriptSettings = $this->getTypoScriptSettings(); 
         $expiresSetting = (int)($typoscriptSettings['expires'] ?? 360);
+        $expires = MathUtility::forceIntegerInRange($expiresSetting, 30, 2000000000, 360);
 
         foreach($challenges as $challenge) {
-            $expires = MathUtility::forceIntegerInRange($this->getTypoScriptSettings()['expires'], 30, 2000000000, 360);
-            if($challenge->getTstamp() + $expiresSetting < time() || ($removedSolvedChallenges && $challenge->getIsSolved())) {
+            if($challenge->getTstamp() + $expires < time() || ($removedSolvedChallenges && $challenge->getIsSolved())) {
                 if(!$dryRun) {
                     $this->challengeRepository->remove($challenge);
                 }
