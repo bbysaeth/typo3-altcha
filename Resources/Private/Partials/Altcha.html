@@ -3,8 +3,8 @@
     xmlns:altcha="http://typo3.org/ns/BBysaeth/Typo3Altcha/ViewHelpers" data-namespace-typo3-fluid="true">
 
 <f:asset.script identifier="altcha" src="EXT:altcha/Resources/Public/JavaScript/dist/altcha.js" defer="true"
-    async="true" type="module" />
-<f:asset.css identifier="altcha-css">
+    async="true" type="module" useNonce="true" />
+<f:asset.css identifier="altcha-css" useNonce="true">
     .is-invalid span.invalid-feedback {
     display:block;
     }
@@ -20,7 +20,7 @@
                 strings="{f:render(partial: 'AltchaTranslations')}"
                 {f:if(condition: settings.hideAltchaLogo, then: 'hidelogo')}
                 {f:if(condition: settings.hideFooter, then: 'hidefooter')}
-                {f:if(condition: settings.auto != 'disabled', then: 'auto={settings.auto}')}
+                {f:if(condition: 'settings.auto != "disabled"', then: 'auto={settings.auto}')}
             ></altcha-widget>
         </altcha:form.altcha>
     </f:render>
