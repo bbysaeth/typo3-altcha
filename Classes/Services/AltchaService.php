@@ -77,7 +77,13 @@ class AltchaService
 
     public function validate(string $payload): bool
     {
-        $payloadArray = json_decode(base64_decode($payload, true), true);
+        $decoded = base64_decode($payload, true);
+
+        if ($decoded === false) {
+            return false;
+        }
+
+        $payloadArray = json_decode($decoded, true);
 
         if ($payloadArray === null) {
             return false;
