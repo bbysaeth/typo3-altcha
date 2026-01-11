@@ -2,20 +2,39 @@
     xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers"
     xmlns:altcha="http://typo3.org/ns/BBysaeth/Typo3Altcha/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<f:asset.script identifier="altcha" src="EXT:altcha/Resources/Public/JavaScript/dist/altcha.js" defer="true"
-    async="true" type="module" useNonce="true" />
-<f:asset.css identifier="altcha-css" useNonce="true">
-    .is-invalid span.invalid-feedback {
-    display:block;
-    }
-</f:asset.css>
-
 <formvh:renderRenderable renderable="{element}">
     <f:render partial="Field/Field" arguments="{element: element, doNotShowLabel: 1}" contentAs="elementContent">
         <altcha:form.altcha property="{element.identifier}" id="{element.uniqueIdentifier}"
             class="{element.properties.elementClassAttribute} form-control">
+            <f:comment>
+                Always use challengeurl (uncached endpoint) to avoid form caching issues.
+                - Local mode: Uses uncached proxy endpoint for local challenge generation
+                - Self-hosted with API key: Uses proxy that forwards with headers
+                - Self-hosted direct: Uses direct URL to server
+            </f:comment>
             <altcha-widget
-                challengejson="{challenge -> f:format.json()}"
+                <f:if condition="{settings.challengeUrl}">
+                    <f:then>
+                        <f:if condition="{settings.apiKey}">
+                            <f:then>
+                                challengeurl="/?type=1719694100"
+                                <f:if condition="{settings.verifyUrl}">
+                                    verifyurl="/?type=1719694101"
+                                </f:if>
+                            </f:then>
+                            <f:else>
+                                challengeurl="{settings.challengeUrl}"
+                                <f:if condition="{settings.verifyUrl}">
+                                    verifyurl="{settings.verifyUrl}"
+                                </f:if>
+                            </f:else>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        challengeurl="/?type=1719694099"
+                    </f:else>
+                </f:if>
+                workerurl="{f:uri.resource(path: 'JavaScript/dist_external/worker.js', extensionName: 'Altcha')}"
                 name="{name}"
                 strings="{f:render(partial: 'AltchaTranslations')}"
                 {f:if(condition: settings.hideAltchaLogo, then: 'hidelogo')}

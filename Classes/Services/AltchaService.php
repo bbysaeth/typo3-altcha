@@ -32,9 +32,17 @@ class AltchaService
     protected function init()
     {
         $this->configuration = $this->extensionConfiguration->get('altcha');
-        $this->typoscriptSetup = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
+        
+        // In CLI context, ConfigurationManager may not have a request
+        // and cannot load TypoScript. We catch this and use defaults instead.
+        try {
+            $this->typoscriptSetup = $this->configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            );
+        } catch (\Exception $e) {
+            // CLI context use empty array, defaults will be used
+            $this->typoscriptSetup = [];
+        }
 
         $hmacKey = trim($this->configuration['hmac'] ?? '');
         if ($hmacKey === '') {
@@ -66,6 +74,8 @@ class AltchaService
         $domainChallenge = new Challenge();
         $domainChallenge->setChallenge($altchaChallenge->challenge); 
         $this->challengeRepository->add($domainChallenge);
+        // Ensure the challenge is persisted immediately, because validation occurs in a separate request.
+        $this->persistenceManager->persistAll();
 
         return [
             'algorithm' => $altchaChallenge->algorithm,
@@ -89,28 +99,38 @@ class AltchaService
             return false;
         }
 
-        $isAltchaSolutionValid = $this->altchaClient->verifySolution($payloadArray);
+        // Try verifying a direct solution payload first
+        $isSolutionValid = $this->altchaClient->verifySolution($payloadArray);
 
-        if (!$isAltchaSolutionValid) {
-            return false;
+        if ($isSolutionValid) {
+            // Mark the locally created challenge as solved to prevent reuse
+            if (!isset($payloadArray['challenge']) || !is_string($payloadArray['challenge'])) {
+                return false;
+            }
+            $challengeString = $payloadArray['challenge'];
+
+            $domainChallenge = $this->challengeRepository->findOneBy(['challenge' => $challengeString, 'isSolved' => false]);
+
+            if (!$domainChallenge instanceof Challenge) {
+                return false;
+            }
+
+            $domainChallenge->setIsSolved(true);
+            $this->challengeRepository->update($domainChallenge);
+            $this->persistenceManager->persistAll();
+
+            return true;
         }
-        
-        if (!isset($payloadArray['challenge']) || !is_string($payloadArray['challenge'])) {
-            return false;
-        }
-        $challengeString = $payloadArray['challenge'];
 
-        $domainChallenge = $this->challengeRepository->findOneBy(['challenge' => $challengeString, 'isSolved' => false]);
-
-        if (!$domainChallenge instanceof Challenge) {
-            return false;
+        // If not a direct solution, attempt to verify a server signature payload
+        $serverVerification = $this->altchaClient->verifyServerSignature($payloadArray);
+        if ($serverVerification->verified) {
+            // For server verification payloads, the server already ensures validity and expiry.
+            // No local challenge persistence is required.
+            return true;
         }
 
-        $domainChallenge->setIsSolved(true);
-        $this->challengeRepository->update($domainChallenge);
-        $this->persistenceManager->persistAll();
-
-        return true;
+        return false;
     }
 
     public function removeObsoleteChallenges(bool $dryRun, bool $removedSolvedChallenges) : int {

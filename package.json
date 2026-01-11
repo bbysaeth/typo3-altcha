@@ -15,6 +15,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "altcha": "^2.0.3"
+    "altcha": "^2.3.0"
   }
 }

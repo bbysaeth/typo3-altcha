@@ -13,6 +13,60 @@ plugin {
             hideAltchaLogo = {$plugin.tx_altcha.hideAltchaLogo}
             expires = {$plugin.tx_altcha.expires}
             auto = {$plugin.tx_altcha.auto}
+            challengeUrl = {$plugin.tx_altcha.challengeUrl}
+            verifyUrl = {$plugin.tx_altcha.verifyUrl}
+            apiKey = {$plugin.tx_altcha.apiKey}
         } 
+    }
+}
+
+# Frontend proxy endpoints for Altcha
+# Local challenge endpoint (uncached) - solves form caching issue
+altcha_local_challenge = PAGE
+altcha_local_challenge {
+    typeNum = 1719694099
+    config {
+        disableAllHeaderCode = 1
+        no_cache = 1
+        additionalHeaders {
+            10.header = Content-Type: application/json
+        }
+    }
+    10 = USER_INT
+    10 {
+        userFunc = BBysaeth\Typo3Altcha\Controller\AltchaProxyController->localChallenge
+    }
+}
+
+# Remote server proxy endpoints (when using self-hosted Altcha)
+altcha_proxy_challenge = PAGE
+altcha_proxy_challenge {
+    typeNum = 1719694100
+    config {
+        disableAllHeaderCode = 1
+        no_cache = 1
+        additionalHeaders {
+            10.header = Content-Type: application/json
+        }
+    }
+    10 = USER_INT
+    10 {
+        userFunc = BBysaeth\Typo3Altcha\Controller\AltchaProxyController->challenge
+    }
+}
+
+altcha_proxy_verify = PAGE
+altcha_proxy_verify {
+    typeNum = 1719694101
+    config {
+        disableAllHeaderCode = 1
+        no_cache = 1
+        additionalHeaders {
+            10.header = Content-Type: application/json
+        }
+    }
+    10 = USER_INT
+    10 {
+        userFunc = BBysaeth\Typo3Altcha\Controller\AltchaProxyController->verify
     }
 }
