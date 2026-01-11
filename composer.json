@@ -37,10 +37,10 @@
         "typo3/cms-scheduler": "^12.4.0 || ^13.0 || 13.0.x-dev"
     },
     "extra": {
-		"typo3/cms": {
-			"extension-key": "altcha"
-		}
-	},
+        "typo3/cms": {
+            "extension-key": "altcha"
+        }
+    },
     "config": {
         "allow-plugins": {
             "typo3/class-alias-loader": true,
