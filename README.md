@@ -50,7 +50,7 @@ The following TypoScript settings are available:
 
 ### Form Caching and Challenge Generation
 
-**Important:** This extension automatically uses an uncached endpoint (`/?type=1719694099`) for local challenge generation to prevent form caching issues. This solves the common problem where cached forms reuse the same challenge, causing validation failures on the first submit attempt.
+**Important:** This extension automatically uses an uncached endpoint (`/?type=1768669000`) for local challenge generation to prevent form caching issues. This solves the common problem where cached forms reuse the same challenge, causing validation failures on the first submit attempt.
 
 No additional configuration is required – the extension handles this automatically.
 
@@ -78,7 +78,7 @@ If you set only `challengeUrl` without `apiKey`, the widget will connect directl
 
 If neither `challengeUrl` nor `verifyUrl` are set, the extension uses:
 
-- **Challenge generation**: Uncached endpoint (`/?type=1719694099`) that generates challenges via HMAC
+- **Challenge generation**: Uncached endpoint (`/?type=1768669000`) that generates challenges via HMAC
 - **Verification**: Server-side validation in PHP via `AltchaValidator` (no `verifyurl` needed)
 - **Benefit**: Prevents form caching issues without requiring `USER_INT` configuration
 
