@@ -1,28 +1,26 @@
-# TYPO3 Extension ``Altcha``
+# TYPO3 Extension `Altcha`
 
 This TYPO3 extension integrates Altcha, an innovative alternative to traditional captchas, into the Form Extension. Altcha employs a proof-of-work approach to safeguard forms against spam and abuse without requiring users to solve visual puzzles.
 
 Key Features:
 
-* Seamless integration with the TYPO3 Form Extension
-* Configurable difficulty levels for the proof-of-work mechanism
-* Automatic validation of Altcha responses
-* Enhanced protection against automated bots
-* User-friendly alternative to conventional captchas
+- Seamless integration with the TYPO3 Form Extension
+- Configurable difficulty levels for the proof-of-work mechanism
+- Automatic validation of Altcha responses
+- Enhanced protection against automated bots
+- User-friendly alternative to conventional captchas
 
 The extension empowers developers to easily incorporate Altcha into existing forms, thereby enhancing security without compromising user experience.
 
 ## Features
 
-* Altcha spam protection field for ext:form
-* Customizable expiration time of challenges
-* Scheduler task for removing obsolete (expired and solved) challenges
+- Altcha spam protection field for ext:form
+- Customizable expiration time of challenges
+- Scheduler task for removing obsolete (expired and solved) challenges
 
 ## Installation
 
-### via Composer
-
-The recommended way to install this TYPO3 extension is by using [Composer](https://getcomposer.org):
+Install this TYPO3 extension using [Composer](https://getcomposer.org):
 
 ```bash
 composer require bbysaeth/typo3-altcha
@@ -31,11 +29,6 @@ composer require bbysaeth/typo3-altcha
 Add the static template and update the database schema via the install tool.
 
 This TYPO3 extension is licensed under the GNU General Public License Version 2 (GPLv2).
-
-### via TYPO3 Extension Repository
-
-Download and install the extension with the Extension Manager module or directly from the
-[TER](https://extensions.typo3.org/extension/altcha/).
 
 ## Configuration
 
@@ -48,18 +41,50 @@ HMAC secret key for challenge generation. If not defined, TYPO3's encryption key
 
 The following TypoScript settings are available:
 
-* `plugin.tx_altcha.minimumComplexity` *(integer)* – Minimum number for range of complexity
-* `plugin.tx_altcha.maximumComplexity` *(integer)* – Maximum number for range of complexity (must be larger than minimumComplexity)
-* `plugin.tx_altcha.expires` *(integer)* – Seconds after which the challenge expires
-* `plugin.tx_altcha.hideFooter` *(bool)* – Hide/Show Altcha footer link in field
-* `plugin.tx_altcha.hideAltchaLogo` *(bool)* – Hide/Show Altcha logo in field
-* `plugin.tx_altcha.auto` *(Choose: disabled, onload, onfocus)* – Enable/Disable auto verify onload or onfocus
+- `plugin.tx_altcha.minimumComplexity` _(integer)_ – Minimum number for range of complexity
+- `plugin.tx_altcha.maximumComplexity` _(integer)_ – Maximum number for range of complexity (must be larger than minimumComplexity)
+- `plugin.tx_altcha.expires` _(integer)_ – Seconds after which the challenge expires
+- `plugin.tx_altcha.hideFooter` _(bool)_ – Hide/Show Altcha footer link in field
+- `plugin.tx_altcha.hideAltchaLogo` _(bool)_ – Hide/Show Altcha logo in field
+- `plugin.tx_altcha.auto` _(Choose: disabled, onload, onfocus)_ – Enable/Disable auto verify onload or onfocus
+
+### Form Caching and Challenge Generation
+
+**Important:** This extension automatically uses an uncached endpoint (`/?type=1768669000`) for local challenge generation to prevent form caching issues. This solves the common problem where cached forms reuse the same challenge, causing validation failures on the first submit attempt.
+
+No additional configuration is required – the extension handles this automatically.
+
+### Self-hosted Altcha Server
+
+You can use a self-hosted Altcha server instead of local challenge generation. Configure the following TypoScript settings:
+
+- `plugin.tx_altcha.challengeUrl` _(string)_ – Challenge endpoint URL
+- `plugin.tx_altcha.verifyUrl` _(string)_ – Verification endpoint URL (required for server-side verification)
+- `plugin.tx_altcha.apiKey` _(string, optional)_ – API key sent via headers (`Authorization: Bearer` and `X-Altcha-API-Key`)
+
+**Using the Proxy Endpoints (Recommended)**
+
+When both `challengeUrl` and `apiKey` are configured, the extension automatically uses built-in proxy endpoints that:
+
+- Forward requests to your self-hosted server
+- Attach the API key via HTTP headers (`Authorization: Bearer {apiKey}` and `X-Altcha-API-Key: {apiKey}`)
+- Keep the API key secure (not exposed in frontend HTML)
+
+**Direct URL Mode (Optional)**
+
+If you set only `challengeUrl` without `apiKey`, the widget will connect directly to your server. This is suitable for same-origin servers using session cookies or public endpoints.
+
+**Local Mode (Default)**
+
+If neither `challengeUrl` nor `verifyUrl` are set, the extension uses:
+
+- **Challenge generation**: Uncached endpoint (`/?type=1768669000`) that generates challenges via HMAC
+- **Verification**: Server-side validation in PHP via `AltchaValidator` (no `verifyurl` needed)
+- **Benefit**: Prevents form caching issues without requiring `USER_INT` configuration
 
 ---
 
 ## 🧩 Customizing Altcha Widget Texts
-
-You can customize the texts displayed by the Altcha widget (e.g., for translation) by overriding the `AltchaTranslations.html` partial.
 
 ### 🛠 1. Create Your Own Partial
 
@@ -85,7 +110,7 @@ TYPO3:
         standard:
           renderingOptions:
             partialRootPaths:
-              20: 'EXT:my_extension/Resources/Private/Frontend/Partials/'
+              20: "EXT:my_extension/Resources/Private/Frontend/Partials/"
 ```
 
 > Your YAML file must be included in TypoScript with a key **higher than the one used by this extension (e.g. > 125)** to ensure it overrides the default path.
@@ -107,21 +132,21 @@ This ensures that your own YAML is loaded **after** the one provided by Altcha.
 
 You can define any of the following keys inside your `AltchaTranslations.html`:
 
-* `ariaLinkLabel`
-* `enterCode`
-* `enterCodeAria`
-* `error`
-* `expired`
-* `footer`
-* `getAudioChallenge`
-* `label`
-* `loading`
-* `reload`
-* `verify`
-* `verificationRequired`
-* `verified`
-* `verifying`
-* `waitAlert`
+- `ariaLinkLabel`
+- `enterCode`
+- `enterCodeAria`
+- `error`
+- `expired`
+- `footer`
+- `getAudioChallenge`
+- `label`
+- `loading`
+- `reload`
+- `verify`
+- `verificationRequired`
+- `verified`
+- `verifying`
+- `waitAlert`
 
 ---
 
@@ -131,11 +156,13 @@ You can define any of the following keys inside your `AltchaTranslations.html`:
 
 ```html
 <f:spaceless>
-    <f:format.json value="{
+  <f:format.json
+    value="{
         label: 'I am not a robot',
         verified: 'Verified',
         verifying: 'Verifying'
-    }" />
+    }"
+  />
 </f:spaceless>
 ```
 
@@ -149,11 +176,13 @@ If you want to use TYPO3’s localization, add the relevant labels to your `loca
 
 ```html
 <f:spaceless>
-    <f:format.json value="{
+  <f:format.json
+    value="{
         ariaLinkLabel: f:translate(key: 'altcha.ariaLinkLabel', extensionName: 'my_extension'),
         error: f:translate(key: 'altcha.error', extensionName: 'my_extension'),
         verified: f:translate(key: 'altcha.verified', extensionName: 'my_extension')
-    }" />
+    }"
+  />
 </f:spaceless>
 ```
 

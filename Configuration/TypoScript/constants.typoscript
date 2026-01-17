@@ -14,4 +14,13 @@ plugin.tx_altcha {
     hideFooter = 0
     # cat=plugin.tx_altcha/settings; type=options[disabled,onfocus,onload]; label=Auto
     auto = disabled
+    # cat=plugin.tx_altcha/server; type=string; label=Challenge URL (optional, use for self-hosted Altcha)
+    challengeUrl = 
+    # cat=plugin.tx_altcha/server; type=string; label=Verify URL (optional, use for self-hosted Altcha)
+    verifyUrl = 
+    # cat=plugin.tx_altcha/server; type=string; label=API Key (optional, appended to challenge/verify URLs)
+    apiKey = 
+
+    # cat=plugin.tx_altcha/server; type=string; label=JSON Content-Type header value for Altcha proxy endpoints
+    jsonContentTypeHeader = Content-Type: application/json
 }
