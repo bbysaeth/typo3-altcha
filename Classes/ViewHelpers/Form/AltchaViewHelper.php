@@ -37,12 +37,14 @@ class AltchaViewHelper extends AbstractFormFieldViewHelper
         $assetCollector->addStyleSheet(
             'altcha-styles',
             'EXT:altcha/Resources/Public/CSS/altcha.css',
-            ['rel' => 'stylesheet']
+            ['rel' => 'stylesheet'],
+            ['useNonce' => true]
         );
         $assetCollector->addStyleSheet(
             'altcha-form-styles',
             'EXT:altcha/Resources/Public/CSS/altcha-form.css',
-            ['rel' => 'stylesheet']
+            ['rel' => 'stylesheet'],
+            ['useNonce' => true]
         );
         $assetCollector->addJavaScript(
             'altcha-script',
@@ -51,7 +53,8 @@ class AltchaViewHelper extends AbstractFormFieldViewHelper
                 'type' => 'module',
                 'async' => true,
                 'defer' => true,
-            ]
+            ],
+            ['useNonce' => true]
         );
 
         $name = $this->getName();
@@ -65,5 +68,4 @@ class AltchaViewHelper extends AbstractFormFieldViewHelper
         
         return $content;
     }
-
 }
