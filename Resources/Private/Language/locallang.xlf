@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1737987000" source-language="en" datatype="plaintext" original="messages" date="2025-01-27T12:00:00Z" product-name="altcha">
+        <header/>
+        <body>
+            <trans-unit id="altcha.strings.ariaLinkLabel" xml:space="preserve">
+                <source>Visit Altcha.org</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.enterCode" xml:space="preserve">
+                <source>Enter the code you hear</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.enterCodeAria" xml:space="preserve">
+                <source>Enter the code you hear. Press the spacebar to play the audio.</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.error" xml:space="preserve">
+                <source>Verification failed. Please try again later.</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.expired" xml:space="preserve">
+                <source>Verification expired. Please try again.</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.footer" xml:space="preserve">
+                <source><![CDATA[Protected by <a href="https://altcha.org/" target="_blank" aria-label="Visit Altcha.org">ALTCHA</a>]]></source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.label" xml:space="preserve">
+                <source>I am not a robot</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.loading" xml:space="preserve">
+                <source>Loading...</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.reload" xml:space="preserve">
+                <source>Reload</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.verify" xml:space="preserve">
+                <source>Verify</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.verificationRequired" xml:space="preserve">
+                <source>Verification required!</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.verified" xml:space="preserve">
+                <source>Verified</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.verifying" xml:space="preserve">
+                <source>Verifying...</source>
+            </trans-unit>
+            <trans-unit id="altcha.strings.waitAlert" xml:space="preserve">
+                <source>Verifying... please wait.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
