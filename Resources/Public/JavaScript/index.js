@@ -1,1 +1,1 @@
-import 'altcha/i18n';
+import "altcha/i18n";

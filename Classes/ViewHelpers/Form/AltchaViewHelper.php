@@ -47,6 +47,16 @@ class AltchaViewHelper extends AbstractFormFieldViewHelper
             ['useNonce' => true]
         );
         $assetCollector->addJavaScript(
+            'altcha-i18n-script',
+            'EXT:altcha/Resources/Public/JavaScript/dist_external/altcha.i18n.umd.js',
+            [
+                'type' => 'module',
+                'async' => true,
+                'defer' => true,
+            ],
+            ['useNonce' => true]
+        );
+        $assetCollector->addJavaScript(
             'altcha-script',
             'EXT:altcha/Resources/Public/JavaScript/dist_external/altcha.js',
             [
