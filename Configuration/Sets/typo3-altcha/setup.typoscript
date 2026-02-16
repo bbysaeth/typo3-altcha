@@ -1,0 +1,19 @@
+@import 'EXT:altcha/Configuration/TypoScript/setup.typoscript'
+
+# Override with SET settings
+plugin.tx_altcha.settings {
+    minimumComplexity = {$minimumComplexity}
+    maximumComplexity = {$maximumComplexity}
+    hideFooter = {$hideFooter}
+    hideAltchaLogo = {$hideAltchaLogo}
+    expires = {$expires}
+    auto = {$auto}
+    challengeUrl = {$challengeUrl}
+    verifyUrl = {$verifyUrl}
+    apiKey = {$apiKey}
+}
+
+altcha_local_challenge.config.additionalHeaders.10.header = {$jsonContentTypeHeader}
+altcha_proxy_challenge.config.additionalHeaders.10.header = {$jsonContentTypeHeader}
+altcha_proxy_verify.config.additionalHeaders.10.header = {$jsonContentTypeHeader}
+}
