@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-02-16T12:00:00Z" product-name="altcha">
+        <header/>
+        <body>
+            <!-- Category labels -->
+            <trans-unit id="category.typo3altcha">
+                <source>Altcha Spam Protection</source>
+            </trans-unit>
+            <trans-unit id="category.typo3altcha.complexity">
+                <source>Complexity Settings</source>
+            </trans-unit>
+            <trans-unit id="category.typo3altcha.appearance">
+                <source>Appearance Settings</source>
+            </trans-unit>
+            <trans-unit id="category.typo3altcha.endpoints">
+                <source>Endpoint Settings</source>
+            </trans-unit>
+            <trans-unit id="category.typo3altcha.behavior">
+                <source>Behavior Settings</source>
+            </trans-unit>
+
+            <!-- Setting labels -->
+            <trans-unit id="settings.minimumComplexity.label">
+                <source>Minimum complexity</source>
+            </trans-unit>
+            <trans-unit id="settings.minimumComplexity.description">
+                <source>Minimum number for range of complexity</source>
+            </trans-unit>
+
+            <trans-unit id="settings.maximumComplexity.label">
+                <source>Maximum complexity</source>
+            </trans-unit>
+            <trans-unit id="settings.maximumComplexity.description">
+                <source>Maximum number for range of complexity (must be larger than minimumComplexity)</source>
+            </trans-unit>
+
+            <trans-unit id="settings.expires.label">
+                <source>Expires after seconds</source>
+            </trans-unit>
+            <trans-unit id="settings.expires.description">
+                <source>Seconds after which the challenge expires</source>
+            </trans-unit>
+
+            <trans-unit id="settings.auto.label">
+                <source>Auto</source>
+            </trans-unit>
+            <trans-unit id="settings.auto.description">
+                <source>Enable/Disable auto verify onload or onfocus</source>
+            </trans-unit>
+
+            <trans-unit id="settings.hideFooter.label">
+                <source>Hide Footer</source>
+            </trans-unit>
+            <trans-unit id="settings.hideFooter.description">
+                <source>Hide/Show Altcha footer link in field</source>
+            </trans-unit>
+
+            <trans-unit id="settings.hideAltchaLogo.label">
+                <source>Hide Altcha Logo</source>
+            </trans-unit>
+            <trans-unit id="settings.hideAltchaLogo.description">
+                <source>Hide/Show Altcha logo in field</source>
+            </trans-unit>
+
+            <trans-unit id="settings.challengeUrl.label">
+                <source>Challenge URL</source>
+            </trans-unit>
+            <trans-unit id="settings.challengeUrl.description">
+                <source>Challenge endpoint URL for self-hosted Altcha server</source>
+            </trans-unit>
+
+            <trans-unit id="settings.verifyUrl.label">
+                <source>Verify URL</source>
+            </trans-unit>
+            <trans-unit id="settings.verifyUrl.description">
+                <source>Verification endpoint URL for self-hosted Altcha server</source>
+            </trans-unit>
+
+            <trans-unit id="settings.apiKey.label">
+                <source>API Key</source>
+            </trans-unit>
+            <trans-unit id="settings.apiKey.description">
+                <source>API key sent via headers (Authorization: Bearer and X-Altcha-API-Key)</source>
+            </trans-unit>
+
+            <trans-unit id="settings.jsonContentTypeHeader.label">
+                <source>JSON Content-Type header</source>
+            </trans-unit>
+            <trans-unit id="settings.jsonContentTypeHeader.description">
+                <source>Header value for Altcha proxy endpoints</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

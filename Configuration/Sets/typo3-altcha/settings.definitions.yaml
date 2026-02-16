@@ -1,0 +1,77 @@
+categories:
+  typo3altcha:
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:category.typo3altcha'
+  typo3altcha.complexity:
+    parent: typo3altcha
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:category.typo3altcha.complexity'
+  typo3altcha.appearance:
+    parent: typo3altcha
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:category.typo3altcha.appearance'
+  typo3altcha.endpoints:
+    parent: typo3altcha
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:category.typo3altcha.endpoints'
+  typo3altcha.behavior:
+    parent: typo3altcha
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:category.typo3altcha.behavior'
+
+settings:
+  minimumComplexity:
+    type: int
+    default: 5000
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.minimumComplexity.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.minimumComplexity.description'
+    category: typo3altcha.complexity
+  maximumComplexity:
+    type: int
+    default: 15000
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.maximumComplexity.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.maximumComplexity.description'
+    category: typo3altcha.complexity
+  expires:
+    type: int
+    default: 360
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.expires.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.expires.description'
+    category: typo3altcha.behavior
+  auto:
+    type: string
+    default: 'disabled'
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.auto.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.auto.description'
+    category: typo3altcha.behavior
+  hideFooter:
+    type: bool
+    default: false
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideFooter.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideFooter.description'
+    category: typo3altcha.appearance
+  hideAltchaLogo:
+    type: bool
+    default: false
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideAltchaLogo.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideAltchaLogo.description'
+    category: typo3altcha.appearance
+  challengeUrl:
+    type: string
+    default: ''
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.challengeUrl.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.challengeUrl.description'
+    category: typo3altcha.endpoints
+  verifyUrl:
+    type: string
+    default: ''
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.verifyUrl.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.verifyUrl.description'
+    category: typo3altcha.endpoints
+  apiKey:
+    type: string
+    default: ''
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.apiKey.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.apiKey.description'
+    category: typo3altcha.endpoints
+  jsonContentTypeHeader:
+    type: string
+    default: 'Content-Type: application/json'
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.jsonContentTypeHeader.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.jsonContentTypeHeader.description'
+    category: typo3altcha.endpoints
