@@ -16,4 +16,3 @@ plugin.tx_altcha.settings {
 altcha_local_challenge.config.additionalHeaders.10.header = {$jsonContentTypeHeader}
 altcha_proxy_challenge.config.additionalHeaders.10.header = {$jsonContentTypeHeader}
 altcha_proxy_verify.config.additionalHeaders.10.header = {$jsonContentTypeHeader}
-}
