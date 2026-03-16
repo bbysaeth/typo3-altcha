@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace BBysaeth\Typo3Altcha\ViewHelpers\Form;
 
 use BBysaeth\Typo3Altcha\Services\AltchaService;
-use TYPO3\CMS\Core\Page\AssetCollector;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 
@@ -31,42 +29,7 @@ class AltchaViewHelper extends AbstractFormFieldViewHelper
     }
 
     public function render(): string
-    {   
-        // Register required assets via AssetCollector to ensure CSP-friendly external files are used
-        $assetCollector = GeneralUtility::makeInstance(AssetCollector::class);
-        $assetCollector->addStyleSheet(
-            'altcha-styles',
-            'EXT:altcha/Resources/Public/CSS/altcha.css',
-            ['rel' => 'stylesheet'],
-            ['useNonce' => true]
-        );
-        $assetCollector->addStyleSheet(
-            'altcha-form-styles',
-            'EXT:altcha/Resources/Public/CSS/altcha-form.css',
-            ['rel' => 'stylesheet'],
-            ['useNonce' => true]
-        );
-        $assetCollector->addJavaScript(
-            'altcha-i18n-script',
-            'EXT:altcha/Resources/Public/JavaScript/dist_external/altcha.i18n.umd.js',
-            [
-                'type' => 'module',
-                'async' => true,
-                'defer' => true,
-            ],
-            ['useNonce' => true]
-        );
-        $assetCollector->addJavaScript(
-            'altcha-script',
-            'EXT:altcha/Resources/Public/JavaScript/dist_external/altcha.js',
-            [
-                'type' => 'module',
-                'async' => true,
-                'defer' => true,
-            ],
-            ['useNonce' => true]
-        );
-
+    {
         $name = $this->getName();
         $this->registerFieldNameForFormTokenGeneration($name);
         $challenge = $this->altchaService->createChallenge();
