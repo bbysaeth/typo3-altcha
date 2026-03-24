@@ -26,11 +26,23 @@ Install this TYPO3 extension using [Composer](https://getcomposer.org):
 composer require bbysaeth/typo3-altcha
 ```
 
-Add the static template and update the database schema via the install tool.
+Choose one integration method and update the database schema via the install tool:
+
+- **Site Set (recommended, TYPO3 v13+)**: include `bbysaeth/typo3-altcha` in your site configuration.
+- **Static Template (classic)**: add `Altcha Form Element` in your TypoScript template record.
 
 This TYPO3 extension is licensed under the GNU General Public License Version 2 (GPLv2).
 
 ## Configuration
+
+### TypoScript Integration: Site Set or Static Template
+
+This extension supports both TYPO3 integration approaches:
+
+- **Site Set** via `Configuration/Sets/typo3-altcha/`
+- **Classic static TypoScript template** via `Configuration/TypoScript/`
+
+Do not load both at the same time. Use one method per site.
 
 ### Extension Configuration
 
