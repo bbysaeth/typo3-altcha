@@ -1,7 +1,7 @@
 {
   "name": "altcha",
-  "version": "0.6.3",
-  "description": "This TYPO3 extension integrates Altcha, an innovative alternative to traditional captchas, into the Form Extension. Altcha employs a proof-of-work approach to safeguard forms against spam and abuse without requiring users to solve visual puzzles. Key Features:",
+  "version": "1.0.0-beta",
+  "description": "TYPO3 ext:form integration for ALTCHA Widget v3 (beta release line).",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,6 +15,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "altcha": "^2.3.0"
+    "altcha": "^3.0.2"
   }
 }

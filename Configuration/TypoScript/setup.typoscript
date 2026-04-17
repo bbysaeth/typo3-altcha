@@ -9,8 +9,9 @@ plugin {
         settings {
             minimumComplexity = {$plugin.tx_altcha.minimumComplexity}
             maximumComplexity = {$plugin.tx_altcha.maximumComplexity}
-            hideFooter = {$plugin.tx_altcha.hideFooter}
+            widgetType = {$plugin.tx_altcha.widgetType}
             hideAltchaLogo = {$plugin.tx_altcha.hideAltchaLogo}
+            hideFooter = {$plugin.tx_altcha.hideFooter}
             expires = {$plugin.tx_altcha.expires}
             auto = {$plugin.tx_altcha.auto}
             challengeUrl = {$plugin.tx_altcha.challengeUrl}

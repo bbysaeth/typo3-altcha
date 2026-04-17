@@ -1,2 +1,2 @@
-# cat=basic; type=string; label=HMAC Sercret Key
+# cat=basic; type=string; label=HMAC Secret Key
 hmac = 

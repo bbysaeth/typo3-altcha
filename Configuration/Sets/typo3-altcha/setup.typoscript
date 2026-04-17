@@ -4,8 +4,9 @@
 plugin.tx_altcha.settings {
     minimumComplexity = {$minimumComplexity}
     maximumComplexity = {$maximumComplexity}
-    hideFooter = {$hideFooter}
+    widgetType = {$widgetType}
     hideAltchaLogo = {$hideAltchaLogo}
+    hideFooter = {$hideFooter}
     expires = {$expires}
     auto = {$auto}
     challengeUrl = {$challengeUrl}

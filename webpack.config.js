@@ -11,11 +11,11 @@ module.exports = {
     alias: {
       "altcha/i18n": path.resolve(
         __dirname,
-        "node_modules/altcha/dist/altcha.i18n.umd.js",
+        "node_modules/altcha/dist/main/altcha.i18n.js",
       ),
       altcha: path.resolve(
         __dirname,
-        "node_modules/altcha/dist_external/altcha.js",
+        "node_modules/altcha/dist/external/altcha.js",
       ),
     },
   },

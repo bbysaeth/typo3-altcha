@@ -13,9 +13,6 @@ return [
         'label' => 'challenge',
         'label_alt' => 'uid',
         'label_alt_force' => 0,
-        'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l18n_parent',
-        'transOrigDiffSourceField' => 'l18n_diffsource',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'enablecolumns' => [
@@ -24,7 +21,7 @@ return [
         'typeicon_classes' => [
             'default' => 'altcha-icon'
         ],
-        'searchFields' => 'uid,title',
+        'searchFields' => 'uid,challenge',
     ],
     'columns' => [
         'pid' => [
@@ -65,12 +62,6 @@ return [
             'config' => [
                 'type' => 'check',
                 'default' => 0,
-            ],
-        ],
-        'sys_language_uid' => [
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'language',
             ],
         ]
     ]

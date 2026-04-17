@@ -1,18 +1,29 @@
 name: CI
 
-on: [push]
+on:
+  push:
+  pull_request:
 
 jobs:
-  lint-typoscript:
+  lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.3', '8.4']
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: shivammathur/setup-php@v2
-      with: 
-        php-version: '8.3'
-    - uses: php-actions/composer@v6
-      with:
-        args: --profile --ignore-platform-reqs
-    - name: Lint lint-typoscript
-      run: |
-        php -v && ./vendor/bin/typoscript-lint --fail-on-warnings
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - uses: php-actions/composer@v6
+        with:
+          args: --profile --ignore-platform-reqs
+
+      - name: Lint PHP files
+        run: find Classes Configuration -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Lint TypoScript
+        run: ./vendor/bin/typoscript-lint --fail-on-warnings

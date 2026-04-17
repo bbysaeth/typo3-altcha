@@ -17,16 +17,17 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 class AltchaValidator extends AbstractValidator
 {
     protected $acceptsEmptyValues = false;
+
     public function __construct(protected AltchaService $altchaService)
     {
     }
+
     protected function isValid($value): void
     {
-        if(!$value || empty($value)) {
+        if (!$value || empty($value)) {
             $this->addError('This field is mandatory.', 1719693214);
-        }
-        elseif ($this->altchaService->validate($value) === false) {
-            $this->addError('ALtcha not correct validatet.', 1719694187);
+        } elseif ($this->altchaService->validate($value) === false) {
+            $this->addError('Altcha validation failed.', 1719694187);
         }
     }
 }

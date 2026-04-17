@@ -4,15 +4,15 @@
 
 <f:asset.css identifier="altcha-styles" href="EXT:altcha/Resources/Public/CSS/altcha.css" useNonce="true" />
 <f:asset.css identifier="altcha-form-styles" href="EXT:altcha/Resources/Public/CSS/altcha-form.css" useNonce="true" />
-<f:asset.script identifier="altcha-script" src="EXT:altcha/Resources/Public/JavaScript/dist_external/altcha.i18n.umd.js" async="true" defer="true" useNonce="true" />
+<f:asset.script identifier="altcha-script" src="EXT:altcha/Resources/Public/JavaScript/dist/altcha.js" async="true" defer="true" useNonce="true" />
 
 <formvh:renderRenderable renderable="{element}">
     <f:render partial="Field/Field" arguments="{element: element, doNotShowLabel: 1}" contentAs="elementContent">
         <altcha:form.altcha property="{element.identifier}" id="{element.uniqueIdentifier}"
             class="{element.properties.elementClassAttribute} form-control">
             <f:comment>
-                Always use challengeurl (uncached endpoint) to avoid form caching issues.
-                - Local mode: Uses uncached proxy endpoint for local challenge generation
+                Always use challenge (uncached endpoint) to avoid form caching issues.
+                - Local mode: Uses an uncached local endpoint for challenge generation
                 - Self-hosted with API key: Uses proxy that forwards with headers
                 - Self-hosted direct: Uses direct URL to server
             </f:comment>
@@ -21,13 +21,13 @@
                     <f:then>
                         <f:if condition="{settings.apiKey}">
                             <f:then>
-                                challengeurl="/?type=1768669001"
+                                challenge="/?type=1768669001"
                                 <f:if condition="{settings.verifyUrl}">
                                     verifyurl="/?type=1768669002"
                                 </f:if>
                             </f:then>
                             <f:else>
-                                challengeurl="{settings.challengeUrl}"
+                                challenge="{settings.challengeUrl}"
                                 <f:if condition="{settings.verifyUrl}">
                                     verifyurl="{settings.verifyUrl}"
                                 </f:if>
@@ -35,13 +35,13 @@
                         </f:if>
                     </f:then>
                     <f:else>
-                        challengeurl="/?type=1768669000"
+                        challenge="/?type=1768669000"
                     </f:else>
                 </f:if>
                 name="{name}"
                 strings="{f:render(partial: 'AltchaTranslations')}"
-                {f:if(condition: settings.hideAltchaLogo, then: 'hidelogo')}
-                {f:if(condition: settings.hideFooter, then: 'hidefooter')}
+                configuration="{f:format.json(value: {hideLogo: settings.hideAltchaLogo, hideFooter: settings.hideFooter})}"
+                {f:if(condition: settings.widgetType, then: 'type={settings.widgetType}')}
                 {f:if(condition: 'settings.auto != "disabled"', then: 'auto={settings.auto}')}
             ></altcha-widget>
         </altcha:form.altcha>

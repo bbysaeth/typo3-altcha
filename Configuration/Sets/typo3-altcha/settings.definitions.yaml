@@ -39,17 +39,23 @@ settings:
     label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.auto.label'
     description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.auto.description'
     category: typo3altcha.behavior
-  hideFooter:
-    type: bool
-    default: false
-    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideFooter.label'
-    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideFooter.description'
+  widgetType:
+    type: string
+    default: 'checkbox'
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.widgetType.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.widgetType.description'
     category: typo3altcha.appearance
   hideAltchaLogo:
     type: bool
     default: false
     label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideAltchaLogo.label'
     description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideAltchaLogo.description'
+    category: typo3altcha.appearance
+  hideFooter:
+    type: bool
+    default: false
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideFooter.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.hideFooter.description'
     category: typo3altcha.appearance
   challengeUrl:
     type: string

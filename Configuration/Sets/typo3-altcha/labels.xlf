@@ -49,18 +49,25 @@
                 <source>Enable/Disable auto verify onload or onfocus</source>
             </trans-unit>
 
-            <trans-unit id="settings.hideFooter.label">
-                <source>Hide Footer</source>
+            <trans-unit id="settings.widgetType.label">
+                <source>Widget type</source>
             </trans-unit>
-            <trans-unit id="settings.hideFooter.description">
-                <source>Hide/Show Altcha footer link in field</source>
+            <trans-unit id="settings.widgetType.description">
+                <source>Select the ALTCHA control style: checkbox, switch, or native checkbox.</source>
             </trans-unit>
 
             <trans-unit id="settings.hideAltchaLogo.label">
-                <source>Hide Altcha Logo</source>
+                <source>Hide ALTCHA logo</source>
             </trans-unit>
             <trans-unit id="settings.hideAltchaLogo.description">
-                <source>Hide/Show Altcha logo in field</source>
+                <source>Hide the ALTCHA logo in the widget.</source>
+            </trans-unit>
+
+            <trans-unit id="settings.hideFooter.label">
+                <source>Hide footer</source>
+            </trans-unit>
+            <trans-unit id="settings.hideFooter.description">
+                <source>Hide the ALTCHA footer text and link.</source>
             </trans-unit>
 
             <trans-unit id="settings.challengeUrl.label">
