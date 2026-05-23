@@ -1,7 +1,7 @@
 {
   "name": "altcha",
-  "version": "1.0.0-beta",
-  "description": "TYPO3 ext:form integration for ALTCHA Widget v3 (beta release line).",
+  "version": "1.0.1",
+  "description": "TYPO3 ext:form integration for ALTCHA Widget v3.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,6 +15,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "altcha": "^3.0.2"
+    "altcha": "^3.0.10"
   }
 }

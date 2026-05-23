@@ -2,15 +2,6 @@
 
 This TYPO3 extension integrates ALTCHA Widget v3 into TYPO3 `ext:form`. It uses ALTCHA's proof-of-work approach to protect forms against spam and abuse without visual puzzles or tracking-based captcha techniques.
 
-## Beta Status
-
-This release line is currently **beta**.
-
-- Frontend integration is based on `altcha` `^3.0.2`
-- Local PHP challenge creation and validation use `altcha-org/altcha` `^2.0`
-- At the moment, the local TYPO3 flow supports `PBKDF2/SHA-256`
-- Please test your form setup carefully before using it in production
-
 ## Features
 
 - ALTCHA Widget v3 form element for `ext:form`
