@@ -13,6 +13,9 @@ return [
         'label' => 'challenge',
         'label_alt' => 'uid',
         'label_alt_force' => 0,
+        // Challenges are managed by the extension only. Editing them in the backend
+        // could reset is_solved and thus re-enable an already consumed challenge.
+        'readOnly' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'enablecolumns' => [
@@ -22,6 +25,11 @@ return [
             'default' => 'altcha-icon'
         ],
         'searchFields' => 'uid,challenge',
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => 'challenge, is_solved, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden',
+        ],
     ],
     'columns' => [
         'pid' => [
