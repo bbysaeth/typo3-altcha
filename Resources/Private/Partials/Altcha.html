@@ -40,8 +40,9 @@
                 </f:if>
                 name="{name}"
                 strings="{f:render(partial: 'AltchaTranslations')}"
-                configuration="{f:format.json(value: {hideLogo: settings.hideAltchaLogo, hideFooter: settings.hideFooter})}"
+                configuration="{f:format.json(value: {hideLogo: settings.hideAltchaLogo, hideFooter: settings.hideFooter, barPlacement: settings.barPlacement})}"
                 {f:if(condition: settings.widgetType, then: 'type={settings.widgetType}')}
+                {f:if(condition: settings.display, then: 'display={settings.display}')}
                 {f:if(condition: 'settings.auto != "disabled"', then: 'auto={settings.auto}')}
             ></altcha-widget>
         </altcha:form.altcha>

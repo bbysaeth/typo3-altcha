@@ -54,9 +54,11 @@ The following TypoScript settings are available:
 - `plugin.tx_altcha.maximumComplexity` _(integer)_ – Cost used for local `PBKDF2/SHA-256` challenge generation
 - `plugin.tx_altcha.expires` _(integer)_ – Seconds after which the challenge expires
 - `plugin.tx_altcha.widgetType` _(checkbox, switch, native)_ – Select the widget control style
+- `plugin.tx_altcha.display` _(standard, floating, overlay, bar, invisible)_ – Visual layout mode of the widget
+- `plugin.tx_altcha.barPlacement` _(bottom, top)_ – Vertical position of the bar, only used with `display = bar`
 - `plugin.tx_altcha.hideAltchaLogo` _(bool)_ – Hide the ALTCHA logo in the widget
 - `plugin.tx_altcha.hideFooter` _(bool)_ – Hide the ALTCHA footer text and link
-- `plugin.tx_altcha.auto` _(Choose: disabled, onload, onfocus)_ – Enable/Disable auto verify onload or onfocus
+- `plugin.tx_altcha.auto` _(Choose: disabled, onload, onfocus, onsubmit)_ – Enable/Disable auto verify onload, onfocus or onsubmit
 
 ### Form Caching and Challenge Generation
 
@@ -96,7 +98,9 @@ If neither `challengeUrl` nor `verifyUrl` are set, the extension uses:
 
 - The extension now uses the widget's `challenge` attribute instead of the removed `challengeurl` or `challengejson` attributes.
 - Existing self-hosted integrations can continue to use the TypoScript settings `challengeUrl` and `verifyUrl`; the extension maps these settings to the v3 widget API internally.
-- The extension exposes `widgetType` directly and passes `hideAltchaLogo` and `hideFooter` through the widget's `configuration` JSON.
+- The extension exposes `widgetType` and `display` directly and passes `hideAltchaLogo`, `hideFooter` and `barPlacement` through the widget's `configuration` JSON.
+- The v3 display modes are available as `plugin.tx_altcha.display`: `standard` (inline), `floating` (bubble, the v2 behaviour), `overlay` (modal), `bar` (narrow bar, new in v3) and `invisible` (new in v3). `bar` can be placed via `plugin.tx_altcha.barPlacement`, which the widget only accepts through the `configuration` JSON.
+- For `bar`, `floating` and `overlay` the widget falls back to `auto = onsubmit` on its own when no `auto` mode is configured. `invisible` does **not** get that fallback, so it requires `plugin.tx_altcha.auto` to be set to `onload` or `onsubmit` – otherwise the widget never verifies and the form can never be submitted.
 - The extension does not currently expose advanced v3 algorithm configuration for local challenges. The initial local integration targets `PBKDF2/SHA-256`.
 - Built-in ALTCHA themes are not wired yet, because they require additional theme CSS assets to be shipped and selected cleanly in TYPO3.
 
