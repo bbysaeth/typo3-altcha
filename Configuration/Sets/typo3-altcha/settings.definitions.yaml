@@ -36,6 +36,11 @@ settings:
   auto:
     type: string
     default: 'disabled'
+    enum:
+      disabled: 'Disabled (user interaction required)'
+      onfocus: 'On focus'
+      onload: 'On load'
+      onsubmit: 'On submit'
     label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.auto.label'
     description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.auto.description'
     category: typo3altcha.behavior
@@ -44,6 +49,27 @@ settings:
     default: 'checkbox'
     label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.widgetType.label'
     description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.widgetType.description'
+    category: typo3altcha.appearance
+  display:
+    type: string
+    default: 'standard'
+    enum:
+      standard: 'Standard (inline widget)'
+      floating: 'Floating (bubble attached to the submit button)'
+      overlay: 'Overlay (modal)'
+      bar: 'Bar (narrow bar at the top or bottom of the screen)'
+      invisible: 'Invisible (no visible widget)'
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.display.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.display.description'
+    category: typo3altcha.appearance
+  barPlacement:
+    type: string
+    default: 'bottom'
+    enum:
+      bottom: 'Bottom'
+      top: 'Top'
+    label: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.barPlacement.label'
+    description: 'LLL:EXT:altcha/Configuration/Sets/typo3-altcha/labels.xlf:settings.barPlacement.description'
     category: typo3altcha.appearance
   hideAltchaLogo:
     type: bool

@@ -10,11 +10,15 @@ plugin.tx_altcha {
     expires = 360
     # cat=plugin.tx_altcha/customization; type=options[checkbox,switch,native]; label=Widget Type
     widgetType = checkbox
+    # cat=plugin.tx_altcha/customization; type=options[standard,floating,overlay,bar,invisible]; label=Display Mode(Default standard)
+    display = standard
+    # cat=plugin.tx_altcha/customization; type=options[bottom,top]; label=Bar Placement (only used with display mode "bar")
+    barPlacement = bottom
     # cat=plugin.tx_altcha/customization; type=boolean; label=Hide ALTCHA Logo(Default 0)
     hideAltchaLogo = 0
     # cat=plugin.tx_altcha/customization; type=boolean; label=Hide Footer(Default 0)
     hideFooter = 0
-    # cat=plugin.tx_altcha/settings; type=options[disabled,onfocus,onload]; label=Auto
+    # cat=plugin.tx_altcha/settings; type=options[disabled,onfocus,onload,onsubmit]; label=Auto (required for display mode "invisible")
     auto = disabled
     # cat=plugin.tx_altcha/server; type=string; label=Challenge URL (optional, use for self-hosted Altcha)
     challengeUrl = 

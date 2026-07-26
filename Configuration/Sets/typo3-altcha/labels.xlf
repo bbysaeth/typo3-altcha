@@ -46,7 +46,7 @@
                 <source>Auto</source>
             </trans-unit>
             <trans-unit id="settings.auto.description">
-                <source>Enable/Disable auto verify onload or onfocus</source>
+                <source>Enable/Disable auto verify onload, onfocus or onsubmit. Required for the display mode "invisible", which the widget never verifies on its own.</source>
             </trans-unit>
 
             <trans-unit id="settings.widgetType.label">
@@ -54,6 +54,20 @@
             </trans-unit>
             <trans-unit id="settings.widgetType.description">
                 <source>Select the ALTCHA control style: checkbox, switch, or native checkbox.</source>
+            </trans-unit>
+
+            <trans-unit id="settings.display.label">
+                <source>Display mode</source>
+            </trans-unit>
+            <trans-unit id="settings.display.description">
+                <source>Visual layout mode of the ALTCHA Widget v3: standard, floating, overlay, bar or invisible.</source>
+            </trans-unit>
+
+            <trans-unit id="settings.barPlacement.label">
+                <source>Bar placement</source>
+            </trans-unit>
+            <trans-unit id="settings.barPlacement.description">
+                <source>Vertical position of the bar. Only used when the display mode is set to "bar".</source>
             </trans-unit>
 
             <trans-unit id="settings.hideAltchaLogo.label">
