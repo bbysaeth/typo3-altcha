@@ -5,6 +5,32 @@ All notable changes to this extension are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - Unreleased
+
+### Changed
+
+- Updated the ALTCHA widget from 3.0.10 to 3.2.1. The parts this extension builds on are unchanged –
+  the custom element's props, the configuration keys, the payload format and the global i18n store API
+  are all identical – so this is a drop-in update. What it brings:
+  - `customElements.define('altcha-widget', …)` is now guarded by `!customElements.get(…)`, which
+    prevents a duplicate definition error when the bundle ends up on a page twice.
+  - A Safari-only fix for the checkbox focus outline.
+  - Updated translations across the bundled locales.
+  - Nonce support for the stylesheet the widget injects: it copies
+    `document.currentScript.nonce` and falls back to `meta[name="csp-nonce"]`. This is not usable
+    under TYPO3 yet, see below.
+
+### Notes
+
+- `style-src-elem 'unsafe-inline'` is still required despite the widget's new nonce support. TYPO3
+  only nonces inline assets, not `<script src="…">`, so the extension's bundle carries no nonce for
+  the widget to copy, and rendering a `meta[name="csp-nonce"]` by hand would break on cached pages
+  because the nonce is per request while the markup is not. The reasoning is documented in
+  `Configuration/ContentSecurityPolicies.php` so the next reader does not have to re-derive it.
+- `altcha-org/altcha` (the PHP library) stays on `^2.0`. There is no 3.x of that package – it is a
+  different project from the npm widget, and v2.1.0 is the current maximum, which `^2.0` already
+  covers.
+
 ## [2.0.0] - 2026-07-30
 
 ### Changed
