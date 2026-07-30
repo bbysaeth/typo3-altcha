@@ -97,7 +97,8 @@ If neither `challengeUrl` nor `verifyUrl` are set, the extension uses:
 ## Widget v3 Notes
 
 - The extension now uses the widget's `challenge` attribute instead of the removed `challengeurl` or `challengejson` attributes.
-- Existing self-hosted integrations can continue to use the TypoScript settings `challengeUrl` and `verifyUrl`; the extension maps these settings to the v3 widget API internally.
+- Existing self-hosted integrations can continue to use the TypoScript settings `challengeUrl` and `verifyUrl`; the extension maps these settings to the v3 widget API internally. `verifyUrl` goes into the widget's `configuration` JSON, because v3 has no `verifyurl` attribute.
+- Custom texts are no longer passed as a `strings` attribute – that attribute does not exist in v3. The extension renders the `AltchaTranslations` partial into a `data-altcha-i18n` attribute and registers its contents in the widget's global i18n store, see [Customizing ALTCHA Texts](#customizing-altcha-texts).
 - The extension exposes `widgetType` and `display` directly and passes `hideAltchaLogo`, `hideFooter` and `barPlacement` through the widget's `configuration` JSON.
 - The v3 display modes are available as `plugin.tx_altcha.display`: `standard` (inline), `floating` (bubble, the v2 behaviour), `overlay` (modal), `bar` (narrow bar, new in v3) and `invisible` (new in v3). `bar` can be placed via `plugin.tx_altcha.barPlacement`, which the widget only accepts through the `configuration` JSON.
 - For `bar`, `floating` and `overlay` the widget falls back to `auto = onsubmit` on its own when no `auto` mode is configured. `invisible` does **not** get that fallback, so it requires `plugin.tx_altcha.auto` to be set to `onload` or `onsubmit` – otherwise the widget never verifies and the form can never be submitted.
@@ -107,6 +108,14 @@ If neither `challengeUrl` nor `verifyUrl` are set, the extension uses:
 ---
 
 ## Customizing ALTCHA Texts
+
+> **You probably do not need this for translations.** Widget v3 ships 62 locales, including a
+> complete German one (`label: "Ich bin kein Roboter"`). The widget resolves the language from
+> `<html lang>`, which TYPO3 fills with the site language, so the widget is translated out of the
+> box. Only override texts if you want different wording than ALTCHA's defaults.
+
+The texts are registered in the widget's **global** i18n store. Several widgets on one page
+therefore share the same texts – per-widget wording is not supported.
 
 ### 1. Create Your Own Partial
 
@@ -132,31 +141,37 @@ TYPO3:
         standard:
           renderingOptions:
             partialRootPaths:
-              20: "EXT:my_extension/Resources/Private/Frontend/Partials/"
+              200: "EXT:my_extension/Resources/Private/Frontend/Partials/"
 ```
 
-> Your YAML file must be included in TypoScript with a key **higher than the one used by this extension (e.g. > 125)** to ensure it overrides the default path.
+> **The key matters.** Fluid resolves partials from the highest key downwards, and this extension
+> registers its own partial path as `175` (see `Configuration/Yaml/FormSetup.yaml`). Your key must be
+> **higher than 175** – with a lower key such as `20` the extension's partial wins and your override
+> is silently ignored.
 
 In your TypoScript setup:
 
 ```typoscript
 plugin.tx_form.settings.yamlConfigurations {
-    125 = EXT:altcha/Configuration/Yaml/FormSetup.yaml
     200 = EXT:my_extension/Configuration/Form/Overrides/form_editor.yaml
 }
 ```
 
-This ensures that your own YAML is loaded **after** the one provided by Altcha.
+This extension registers its own YAML as `175` from `ext_localconf.php`, so you do not have to repeat
+that line – just make sure your key is **higher than 175** so your YAML is loaded afterwards.
 
 ---
 
 ### Available Translation Keys
 
-You can define any of the following keys inside your `AltchaTranslations.html`:
+You can define any of the following keys inside your `AltchaTranslations.html`. Keys you leave out keep
+the value from ALTCHA's own locale, so a partial override is fine:
 
 - `ariaLinkLabel`
+- `cancel`
 - `enterCode`
 - `enterCodeAria`
+- `enterCodeFromImage`
 - `error`
 - `expired`
 - `footer`
