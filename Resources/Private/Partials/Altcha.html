@@ -15,35 +15,51 @@
                 - Local mode: Uses an uncached local endpoint for challenge generation
                 - Self-hosted with API key: Uses proxy that forwards with headers
                 - Self-hosted direct: Uses direct URL to server
+
+                The widget has no `verifyurl` attribute, it only accepts the verification
+                endpoint as `verifyUrl` inside the `configuration` JSON.
             </f:comment>
-            <altcha-widget
-                <f:if condition="{settings.challengeUrl}">
+            <f:variable name="altchaChallengeUrl" value="/?type=1768669000" />
+            <f:variable name="altchaVerifyUrl" value="" />
+            <f:if condition="{settings.challengeUrl}">
+                <f:if condition="{settings.apiKey}">
                     <f:then>
-                        <f:if condition="{settings.apiKey}">
-                            <f:then>
-                                challenge="/?type=1768669001"
-                                <f:if condition="{settings.verifyUrl}">
-                                    verifyurl="/?type=1768669002"
-                                </f:if>
-                            </f:then>
-                            <f:else>
-                                challenge="{settings.challengeUrl}"
-                                <f:if condition="{settings.verifyUrl}">
-                                    verifyurl="{settings.verifyUrl}"
-                                </f:if>
-                            </f:else>
+                        <f:variable name="altchaChallengeUrl" value="/?type=1768669001" />
+                        <f:if condition="{settings.verifyUrl}">
+                            <f:variable name="altchaVerifyUrl" value="/?type=1768669002" />
                         </f:if>
                     </f:then>
                     <f:else>
-                        challenge="/?type=1768669000"
+                        <f:variable name="altchaChallengeUrl" value="{settings.challengeUrl}" />
+                        <f:if condition="{settings.verifyUrl}">
+                            <f:variable name="altchaVerifyUrl" value="{settings.verifyUrl}" />
+                        </f:if>
                     </f:else>
                 </f:if>
+            </f:if>
+            <f:comment>
+                Custom texts are picked up by EXT:altcha's own JavaScript and registered in
+                the widget's global i18n store, because v3 dropped the `strings` attribute.
+            </f:comment>
+            <f:variable name="altchaStrings">{f:render(partial: 'AltchaTranslations')}</f:variable>
+            <altcha-widget
+                challenge="{altchaChallengeUrl}"
                 name="{name}"
-                strings="{f:render(partial: 'AltchaTranslations')}"
-                configuration="{f:format.json(value: {hideLogo: settings.hideAltchaLogo, hideFooter: settings.hideFooter, barPlacement: settings.barPlacement})}"
-                {f:if(condition: settings.widgetType, then: 'type={settings.widgetType}')}
-                {f:if(condition: settings.display, then: 'display={settings.display}')}
-                {f:if(condition: 'settings.auto != "disabled"', then: 'auto={settings.auto}')}
+                configuration="{f:format.json(value: {hideLogo: settings.hideAltchaLogo, hideFooter: settings.hideFooter, barPlacement: settings.barPlacement, verifyUrl: altchaVerifyUrl})}"
+                <f:if condition="{settings.widgetType}">type="{settings.widgetType}"</f:if>
+                <f:if condition="{settings.display}">display="{settings.display}"</f:if>
+                <f:comment>
+                    `auto` has to be omitted entirely when disabled. The previous inline
+                    condition passed the comparison as a quoted string, which is always
+                    truthy, so the attribute was always rendered.
+                </f:comment>
+                <f:if condition="{settings.auto} && {settings.auto} != 'disabled'">auto="{settings.auto}"</f:if>
+                <f:comment>
+                    f:format.raw is required here: the partial output is already HTML
+                    encoded, and rendering the variable would encode it a second time,
+                    which leaves &amp;quot; in the attribute and breaks JSON.parse.
+                </f:comment>
+                <f:if condition="{altchaStrings} && {altchaStrings} != 'null'">data-altcha-i18n="{altchaStrings -> f:format.raw()}"</f:if>
             ></altcha-widget>
         </altcha:form.altcha>
     </f:render>
