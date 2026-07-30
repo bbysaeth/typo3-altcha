@@ -31,6 +31,13 @@ address features that were silently doing nothing, so please read the upgrade no
   the workload is no longer predictable.
 - **`auto` was always rendered as an attribute**, even with `auto = disabled`. The Fluid condition
   passed the comparison as a quoted string, which is always truthy.
+- **The cleanup command ran out of memory on large tables.** It loaded every challenge as an Extbase
+  object and filtered them in PHP, keeping each row plus its persistence session entry in memory.
+  Counting and deleting now happen in a single statement each. Measured with 300 000 obsolete rows and
+  `memory_limit=128M`: the old code died with `Allowed memory size of 134217728 bytes exhausted`, the
+  new one deletes them in 1.4 s. Reported by a user who hit this in production.
+- Hidden challenge rows are now cleaned up as well. The Extbase query applied the default enable
+  fields, so rows with `hidden = 1` were never removed.
 - Missing TCA types for the challenge table.
 - `hideLogo` and `hideFooter` are handed to the widget as real booleans instead of TypoScript strings.
 
@@ -38,6 +45,10 @@ address features that were silently doing nothing, so please read the upgrade no
 
 - The v3 display modes (`standard`, `floating`, `overlay`, `bar`, `invisible`) are configurable as
   site settings.
+- The challenge table is registered with the core's `TableGarbageCollectionTask`, so cleaning up can
+  be scheduled from the scheduler module instead of the extension's console command. Note that the
+  shipped `expirePeriod` only applies when the task cleans up all tables; selecting this single table
+  makes the task's own *Number of days* field decide.
 
 ### Changed
 

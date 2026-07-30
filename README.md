@@ -8,7 +8,7 @@ This TYPO3 extension integrates ALTCHA Widget v3 into TYPO3 `ext:form`. It uses 
 - Customizable expiration time of challenges
 - Local uncached challenge endpoint for cached TYPO3 forms
 - Proxy endpoints for self-hosted ALTCHA or Sentinel setups
-- Scheduler task for removing obsolete (expired and solved) challenges
+- Console command and scheduler task for removing obsolete (expired and solved) challenges
 
 ## Installation
 
@@ -65,6 +65,37 @@ The following TypoScript settings are available:
 **Important:** This extension automatically uses an uncached endpoint (`/?type=1768669000`) for local challenge generation to prevent form caching issues. This avoids reused challenges in cached forms and keeps ALTCHA Widget v3 compatible with TYPO3 page caching.
 
 No additional configuration is required – the extension handles this automatically.
+
+### Cleaning Up Challenges
+
+Every challenge handed to a client is stored in `tx_typo3altcha_domain_model_challenge`, so that a
+solution can only be redeemed once. The row is worthless as soon as the signed expiry has passed – it
+only has to outlive the challenge itself. Schedule one of the two options below, otherwise the table
+grows with every form view.
+
+**Console command**
+
+```bash
+vendor/bin/typo3 altcha:remove-obsolete-challenges [--dry-run] [--include-solved-challenges]
+```
+
+Deletes everything older than `plugin.tx_altcha.expires` seconds, so it can be run as often as you
+like and honours the configured expiry to the second. `--dry-run` reports what would be deleted
+without touching anything, `--include-solved-challenges` additionally removes rows that were already
+redeemed. Deletion happens in a single statement, so memory usage does not depend on the number of
+rows.
+
+**Core scheduler task**
+
+The extension registers the challenge table with the core's `TableGarbageCollectionTask`, so you can
+pick `Table garbage collection` in the scheduler module instead of running the command. This requires
+`typo3/cms-scheduler`.
+
+> **Mind the day count.** The registration ships `expirePeriod: 1`, but the core task only uses that
+> value when the task is configured to clean up **all** tables. If you select this single table in the
+> task, its own *Number of days* field decides instead. Either way the granularity is whole days,
+> which is coarser than the command but safe: challenges expire after seconds and the row merely has
+> to survive that long.
 
 ### Self-hosted ALTCHA Server
 

@@ -262,24 +262,14 @@ class AltchaService
 
     public function removeObsoleteChallenges(bool $dryRun, bool $removedSolvedChallenges): int
     {
-        $challenges = $this->challengeRepository->findAll();
-        $count = 0;
         $typoscriptSettings = $this->getTypoScriptSettings();
         $expiresSetting = (int) ($typoscriptSettings['expires'] ?? 360);
         $expires = MathUtility::forceIntegerInRange($expiresSetting, 30, 2000000000, 360);
 
-        foreach ($challenges as $challenge) {
-            if ($challenge->getTstamp() + $expires < time() || ($removedSolvedChallenges && $challenge->getIsSolved())) {
-                if (!$dryRun) {
-                    $this->challengeRepository->remove($challenge);
-                }
-                $count++;
-            }
-        }
-        if ($count > 0 && !$dryRun) {
-            $this->persistenceManager->persistAll();
+        if ($dryRun) {
+            return $this->challengeRepository->countObsolete($expires, $removedSolvedChallenges);
         }
 
-        return $count;
+        return $this->challengeRepository->deleteObsolete($expires, $removedSolvedChallenges);
     }
 }
