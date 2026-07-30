@@ -23,6 +23,13 @@ use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
 class AltchaService
 {
+    /**
+     * Upper bound for the PBKDF2 iteration count, see determineCost(). Beyond this
+     * the browser widget runs into its own 90 second solver timeout on slower
+     * devices, which surfaces as a failed verification rather than a slow one.
+     */
+    protected const MAXIMUM_ALLOWED_COST = 50000;
+
     protected array $configuration = [];
     protected array $typoscriptSetup = [];
     protected Altcha $altchaClient;
@@ -67,13 +74,12 @@ class AltchaService
     public function createChallenge(): array
     {
         $typoscriptSettings = $this->getTypoScriptSettings();
-        $maxComplexity = (int) ($typoscriptSettings['maximumComplexity'] ?? 15000);
         $expiresInSeconds = (int) ($typoscriptSettings['expires'] ?? 360);
         $algorithm = new Pbkdf2();
 
         $altchaChallenge = $this->altchaClient->createChallenge(new CreateChallengeOptions(
             algorithm: $algorithm,
-            cost: max(1, $maxComplexity),
+            cost: $this->determineCost($typoscriptSettings),
             expiresAt: (new \DateTimeImmutable())->add(new \DateInterval('PT' . $expiresInSeconds . 'S')),
         ));
         
@@ -84,6 +90,39 @@ class AltchaService
         $this->persistenceManager->persistAll();
 
         return $altchaChallenge->toArray();
+    }
+
+    /**
+     * Picks the PBKDF2 iteration count for a single derivation attempt.
+     *
+     * The challenge keeps the library's default key prefix of one zero byte, so a
+     * client needs roughly 256 attempts on average to find a matching counter. The
+     * total work is therefore about 256 * cost iterations, which is what keeps the
+     * defaults (5000-15000) in the one to three second range on typical hardware.
+     * Randomizing within the range prevents the workload from being predictable.
+     *
+     * @param array<string, mixed> $typoscriptSettings
+     */
+    protected function determineCost(array $typoscriptSettings): int
+    {
+        $minComplexity = MathUtility::forceIntegerInRange(
+            (int) ($typoscriptSettings['minimumComplexity'] ?? 5000),
+            1,
+            self::MAXIMUM_ALLOWED_COST,
+            5000
+        );
+        $maxComplexity = MathUtility::forceIntegerInRange(
+            (int) ($typoscriptSettings['maximumComplexity'] ?? 15000),
+            1,
+            self::MAXIMUM_ALLOWED_COST,
+            15000
+        );
+
+        if ($maxComplexity < $minComplexity) {
+            return $minComplexity;
+        }
+
+        return random_int($minComplexity, $maxComplexity);
     }
 
     public function validate(string $payload): bool
