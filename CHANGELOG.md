@@ -5,6 +5,45 @@ All notable changes to this extension are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - Unreleased
+
+### Changed
+
+- **BREAKING: the site set settings are now prefixed with `altcha.`.** They previously used bare names
+  such as `minimumComplexity` or `widgetType`. Site settings share a single namespace across every set
+  of an installation, so those names could collide with other extensions.
+
+  Rename the keys in your site configuration. Unprefixed keys are ignored, and the affected settings
+  silently fall back to their defaults:
+
+  | before | after |
+  | --- | --- |
+  | `minimumComplexity` | `altcha.minimumComplexity` |
+  | `maximumComplexity` | `altcha.maximumComplexity` |
+  | `expires` | `altcha.expires` |
+  | `auto` | `altcha.auto` |
+  | `widgetType` | `altcha.widgetType` |
+  | `display` | `altcha.display` |
+  | `barPlacement` | `altcha.barPlacement` |
+  | `hideAltchaLogo` | `altcha.hideAltchaLogo` |
+  | `hideFooter` | `altcha.hideFooter` |
+  | `challengeUrl` | `altcha.challengeUrl` |
+  | `verifyUrl` | `altcha.verifyUrl` |
+  | `apiKey` | `altcha.apiKey` |
+  | `jsonContentTypeHeader` | `altcha.jsonContentTypeHeader` |
+
+  **Installations using the static template are not affected** – those are TypoScript constants under
+  `plugin.tx_altcha` and were never renamed. The category names already carried a `typo3altcha`
+  prefix and are unchanged.
+
+  TYPO3 offers no aliasing or deprecation mechanism for renamed site settings, so there is no
+  transitional period: the old keys stop working with this release.
+
+### Documentation
+
+- Documented the site set settings in the README, which previously only listed the
+  `plugin.tx_altcha.*` TypoScript constants.
+
 ## [1.1.0] - 2026-07-30
 
 This release repairs the widget v3 integration that shipped with 1.0.1. Three of the fixes below
@@ -81,4 +120,5 @@ address features that were silently doing nothing, so please read the upgrade no
 - **If you override ALTCHA texts,** raise the `partialRootPaths` key in your YAML above `175`,
   otherwise your partial is ignored.
 
+[2.0.0]: https://github.com/bbysaeth/typo3-altcha/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/bbysaeth/typo3-altcha/compare/v1.0.1...v1.1.0

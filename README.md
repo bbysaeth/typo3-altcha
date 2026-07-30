@@ -60,6 +60,26 @@ The following TypoScript settings are available:
 - `plugin.tx_altcha.hideFooter` _(bool)_ – Hide the ALTCHA footer text and link
 - `plugin.tx_altcha.auto` _(Choose: disabled, onload, onfocus, onsubmit)_ – Enable/Disable auto verify onload, onfocus or onsubmit
 
+### Site Set Settings
+
+When you integrate via the site set, the same options are available as site settings. They carry an
+`altcha.` prefix instead of the `plugin.tx_altcha.` one, because site settings share a single
+namespace across all sets of an installation:
+
+```yaml
+# config/sites/<identifier>/settings.yaml
+altcha:
+  minimumComplexity: 5000
+  maximumComplexity: 15000
+  widgetType: checkbox
+  display: standard
+```
+
+> **Renamed in 2.0.0.** These settings previously used bare names (`minimumComplexity` instead of
+> `altcha.minimumComplexity`). If you are upgrading from 1.x, rename the keys in your site
+> configuration – unprefixed keys are ignored and the settings silently fall back to their defaults.
+> Installations using the static template are not affected.
+
 ### Form Caching and Challenge Generation
 
 **Important:** This extension automatically uses an uncached endpoint (`/?type=1768669000`) for local challenge generation to prevent form caching issues. This avoids reused challenges in cached forms and keeps ALTCHA Widget v3 compatible with TYPO3 page caching.
