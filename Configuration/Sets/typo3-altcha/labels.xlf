@@ -25,14 +25,14 @@
                 <source>Minimum complexity</source>
             </trans-unit>
             <trans-unit id="settings.minimumComplexity.description">
-                <source>Minimum number for range of complexity</source>
+                <source>Lower bound for the PBKDF2 iterations a client computes per attempt. A challenge needs about 256 attempts, so the total work is roughly 256 times this value.</source>
             </trans-unit>
 
             <trans-unit id="settings.maximumComplexity.label">
                 <source>Maximum complexity</source>
             </trans-unit>
             <trans-unit id="settings.maximumComplexity.description">
-                <source>Maximum number for range of complexity (must be larger than minimumComplexity)</source>
+                <source>Upper bound for the PBKDF2 iterations per attempt (must be larger than minimumComplexity). Values above 50000 are capped, because the browser widget aborts unsolved challenges after 90 seconds.</source>
             </trans-unit>
 
             <trans-unit id="settings.expires.label">

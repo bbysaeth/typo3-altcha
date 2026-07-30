@@ -2,9 +2,9 @@
 # customsubcategory=customization=Customization of the field
 
 plugin.tx_altcha {
-    # cat=plugin.tx_altcha/complexity; type=integer; label=Minimum complexity(Default 5000)
+    # cat=plugin.tx_altcha/complexity; type=integer; label=Minimum complexity(Default 5000): Lower bound for the PBKDF2 iterations per attempt
     minimumComplexity = 5000
-    # cat=plugin.tx_altcha/complexity; type=integer; label=Maximum complexity(Default 15000)
+    # cat=plugin.tx_altcha/complexity; type=integer; label=Maximum complexity(Default 15000): Upper bound for the PBKDF2 iterations per attempt, capped at 50000
     maximumComplexity = 15000
     # cat=plugin.tx_altcha/complexity; type=integer; label=Expires after seconds(Default 360)
     expires = 360
