@@ -1,6 +1,6 @@
 {
   "name": "altcha",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "TYPO3 ext:form integration for ALTCHA Widget v3.",
   "main": "index.js",
   "scripts": {
