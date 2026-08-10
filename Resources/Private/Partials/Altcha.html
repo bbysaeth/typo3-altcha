@@ -18,15 +18,20 @@
 
                 The widget has no `verifyurl` attribute, it only accepts the verification
                 endpoint as `verifyUrl` inside the `configuration` JSON.
+
+                The internal endpoints are built with f:uri.page rather than written out
+                as `/?type=...`. On a site whose languages all use a path prefix there is
+                no page on `/`, so a hardcoded root-relative URL gets redirected to the
+                default language and returns HTML instead of JSON.
             </f:comment>
-            <f:variable name="altchaChallengeUrl" value="/?type=1768669000" />
+            <f:variable name="altchaChallengeUrl">{f:uri.page(pageType: 1768669000, language: 'current')}</f:variable>
             <f:variable name="altchaVerifyUrl" value="" />
             <f:if condition="{settings.challengeUrl}">
                 <f:if condition="{settings.apiKey}">
                     <f:then>
-                        <f:variable name="altchaChallengeUrl" value="/?type=1768669001" />
+                        <f:variable name="altchaChallengeUrl">{f:uri.page(pageType: 1768669001, language: 'current')}</f:variable>
                         <f:if condition="{settings.verifyUrl}">
-                            <f:variable name="altchaVerifyUrl" value="/?type=1768669002" />
+                            <f:variable name="altchaVerifyUrl">{f:uri.page(pageType: 1768669002, language: 'current')}</f:variable>
                         </f:if>
                     </f:then>
                     <f:else>
