@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.1] - Unreleased
 
+### Fixed
+
+- **The internal endpoints ignored the site language.** The challenge and proxy endpoints were written
+  out as root-relative `/?type=…` URLs. On a site whose languages all use a path prefix (`/de/`,
+  `/en/`, nothing on `/`) there is no page on `/`, so the request was redirected to the default
+  language and answered with the start page's HTML instead of JSON — the widget could neither load nor
+  verify a challenge. All three endpoints are now generated with `f:uri.page` for the current
+  language. Single-language sites are unaffected, the URL stays `/?type=…`. Reported and diagnosed by
+  @ronykhoury in #56.
+
 ### Changed
 
 - Updated the ALTCHA widget from 3.0.10 to 3.2.1. The parts this extension builds on are unchanged –

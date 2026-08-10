@@ -82,7 +82,9 @@ altcha:
 
 ### Form Caching and Challenge Generation
 
-**Important:** This extension automatically uses an uncached endpoint (`/?type=1768669000`) for local challenge generation to prevent form caching issues. This avoids reused challenges in cached forms and keeps ALTCHA Widget v3 compatible with TYPO3 page caching.
+**Important:** This extension automatically uses an uncached endpoint (page type `1768669000`) for local challenge generation to prevent form caching issues. This avoids reused challenges in cached forms and keeps ALTCHA Widget v3 compatible with TYPO3 page caching.
+
+The endpoint URL is generated for the current site language, so it is `/?type=1768669000` on a single-language site and `/de/?type=1768669000` on a site whose languages use a path prefix.
 
 No additional configuration is required – the extension handles this automatically.
 
@@ -141,7 +143,7 @@ If you set only `challengeUrl` without `apiKey`, the widget will connect directl
 
 If neither `challengeUrl` nor `verifyUrl` are set, the extension uses:
 
-- **Challenge generation**: Uncached endpoint (`/?type=1768669000`) that generates local `PBKDF2/SHA-256` challenges
+- **Challenge generation**: Uncached endpoint (page type `1768669000`, generated for the current site language) that generates local `PBKDF2/SHA-256` challenges
 - **Verification**: Server-side validation in PHP via `AltchaValidator` (no separate verification endpoint required)
 - **Benefit**: Prevents form caching issues without requiring `USER_INT` configuration
 
