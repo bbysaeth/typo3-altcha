@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.2] - Unreleased
 
+### Changed
+
+- Updated the ALTCHA widget to 3.6.0 and the ALTCHA PHP library to 2.4.0. TYPO3 13.4 and 14 remain supported.
+- Updated webpack, webpack-cli, the TypoScript linter and PHPStan. Building the JavaScript bundle now requires Node.js 22.15.0 or newer.
+
 ### Fixed
 
 - **The internal endpoints ignored the site language.** The challenge and proxy endpoints were written

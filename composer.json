@@ -32,7 +32,7 @@
         "typo3/cms-extbase": "^13.4 || ^14.0",
         "typo3/cms-form": "^13.4 || ^14.0",
         "typo3/cms-fluid": "^13.4 || ^14.0",
-        "altcha-org/altcha": "^2.0"
+        "altcha-org/altcha": "^2.4"
     },
     "suggest": {
         "typo3/cms-scheduler": "^13.4 || ^14.0"
@@ -49,7 +49,7 @@
         }
     },
     "require-dev": {
-        "helmich/typo3-typoscript-lint": "^3.2",
-        "phpstan/phpstan": "^2.1"
+        "helmich/typo3-typoscript-lint": "^3.3",
+        "phpstan/phpstan": "^2.3"
     }
 }
